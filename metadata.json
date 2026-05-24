@@ -1,0 +1,6 @@
+{
+  "name": "Digital Studio Website",
+  "description": "A responsive, modern four-page portfolio website featuring Home, About, Services, and Contact views with interactive details, fully responsive layouts, and elegant aesthetics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
