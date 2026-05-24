@@ -3,11 +3,552 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <title>Vanguard — Premium Digital Design & Static Systems</title>
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stable Tailwind CSS CDN v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    <style type="text/css">
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #fafafa;
+        color: #171717;
+      }
+      .font-display {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+    </style>
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body class="min-h-screen flex flex-col bg-zinc-50 relative">
+
+    <!-- Header Navigation -->
+    <header id="main-navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent border-b border-transparent">
+      <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 text-black hover:opacity-85 transition-opacity group">
+          <div class="w-10 h-10 bg-zinc-950 flex items-center justify-center rounded-lg group-hover:rotate-6 transition-transform">
+            <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+          </div>
+          <div class="text-left">
+            <span class="font-display font-bold text-lg tracking-tight block">Vanguard</span>
+            <span class="font-mono text-[9px] font-semibold text-zinc-500 tracking-widest uppercase block -mt-1">Digital Studio</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-950">
+            Home
+            <div class="absolute bottom-0 left-0 w-full h-[2px] bg-zinc-950 rounded-full"></div>
+          </a>
+          <a href="about.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-500 hover:text-zinc-950 transition-colors">
+            About
+          </a>
+          <a href="services.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-500 hover:text-zinc-950 transition-colors">
+            Services
+          </a>
+          <a href="contact.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-500 hover:text-zinc-950 transition-colors">
+            Contact
+          </a>
+        </nav>
+
+        <!-- CTA Trigger -->
+        <div class="hidden md:block">
+          <a href="contact.html" class="px-5 py-2.5 bg-zinc-950 hover:bg-zinc-800 text-white font-display text-xs font-semibold uppercase tracking-widest rounded-lg transition-colors inline-block text-center">
+            Start Project
+          </a>
+        </div>
+
+        <!-- Mobile Menu Trigger -->
+        <button id="mobile-menu-trigger" class="p-2 md:hidden text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors cursor-pointer" aria-label="Toggle Menu">
+          <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-dropdown" class="hidden md:hidden absolute top-20 left-0 w-full bg-white border-b border-zinc-250 shadow-xl flex-col p-6 gap-4">
+        <a href="index.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg bg-zinc-950 text-white">
+          Home
+        </a>
+        <a href="about.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg text-zinc-650 hover:bg-zinc-50 hover:text-zinc-950 transition-colors">
+          About
+        </a>
+        <a href="services.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg text-zinc-650 hover:bg-zinc-50 hover:text-zinc-950 transition-colors">
+          Services
+        </a>
+        <a href="contact.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg text-zinc-650 hover:bg-zinc-50 hover:text-zinc-950 transition-colors">
+          Contact
+        </a>
+        <div class="h-[1px] bg-zinc-100 my-2"></div>
+        <a href="contact.html" class="w-full py-3.5 bg-zinc-950 text-white font-display text-sm font-bold tracking-wider uppercase rounded-lg transition-colors block text-center">
+          Start Project
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-20">
+      
+      <!-- Hero Section -->
+      <section class="relative pt-28 pb-20 md:pt-40 md:pb-32 bg-gradient-to-b from-zinc-50 to-white overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative">
+          <div class="max-w-3xl">
+            <!-- Alert Badge -->
+            <div class="inline-flex items-center gap-2 bg-zinc-100 border border-zinc-200 text-zinc-800 px-3 py-1 rounded-full mb-6">
+              <span class="w-2 h-2 rounded-full bg-zinc-950 animate-pulse"></span>
+              <span class="font-mono text-[10px] uppercase tracking-widest font-bold">Now booking for Q3 2026</span>
+            </div>
+            
+            <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-950 leading-[1.1] mb-8">
+              Exceptional digital design. Built on absolute <span class="underline decoration-2 underline-offset-8 decoration-zinc-900">architectural honesty</span>.
+            </h1>
+            
+            <p class="font-sans text-lg text-zinc-600 leading-relaxed mb-10 max-w-2xl">
+              We construct clean, incredibly fast web layouts, visual design systems, and responsive layouts that perform flawlessly under any scale. No visual slop, just pure craft.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="contact.html" class="group flex items-center justify-center gap-2 px-7 py-4 bg-zinc-950 hover:bg-zinc-800 text-white font-display text-xs font-bold uppercase tracking-widest rounded-lg transition-all shadow-md hover:shadow-lg">
+                Initiate Project Brief
+                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform"></i>
+              </a>
+              <a href="services.html" class="px-7 py-4 bg-white hover:bg-zinc-50 text-zinc-950 border border-zinc-200 font-display text-xs font-bold uppercase tracking-widest rounded-lg transition-all text-center">
+                Explore Services
+              </a>
+            </div>
+          </div>
+
+          <!-- Key Metrics -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-10 border-t border-zinc-200">
+            <div>
+              <span class="font-mono text-3xl font-bold text-zinc-950 block">100%</span>
+              <span class="font-sans text-xs text-zinc-500 uppercase tracking-widest mt-1 block">W3C Compliance</span>
+            </div>
+            <div>
+              <span class="font-mono text-3xl font-bold text-zinc-950 block">12+</span>
+              <span class="font-sans text-xs text-zinc-500 uppercase tracking-widest mt-1 block">Industry Awards</span>
+            </div>
+            <div>
+              <span class="font-mono text-3xl font-bold text-zinc-950 block">98%</span>
+              <span class="font-sans text-xs text-zinc-500 uppercase tracking-widest mt-1 block">Satisfaction Score</span>
+            </div>
+            <div>
+              <span class="font-mono text-3xl font-bold text-zinc-950 block">&lt; 1s</span>
+              <span class="font-sans text-xs text-zinc-500 uppercase tracking-widest mt-1 block">FCP Load Speed</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Philosophy / Pillar Cards -->
+      <section class="py-24 bg-white border-y border-zinc-100">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-3">Our Core Philosophy</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight">
+              Crafted meticulously. Decided with absolute intent.
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-zinc-50 p-8 rounded-xl border border-zinc-100 hover:border-zinc-350 transition-all flex flex-col gap-6">
+              <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-zinc-200 shadow-sm">
+                <i data-lucide="pen-tool" class="w-6 h-6 text-zinc-950"></i>
+              </div>
+              <div>
+                <h3 class="font-display font-semibold text-lg text-zinc-950 mb-2">Impeccable Visual Integrity</h3>
+                <p class="font-sans text-sm text-zinc-600 leading-relaxed">
+                  We create tailored color grids, bespoke responsive frames, and pristine typography pairings to elevate your unique identity.
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-zinc-50 p-8 rounded-xl border border-zinc-100 hover:border-zinc-350 transition-all flex flex-col gap-6">
+              <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-zinc-200 shadow-sm">
+                <i data-lucide="code" class="w-6 h-6 text-zinc-950"></i>
+              </div>
+              <div>
+                <h3 class="font-display font-semibold text-lg text-zinc-950 mb-2">Next-Gen Clean Code</h3>
+                <p class="font-sans text-sm text-zinc-600 leading-relaxed">
+                  Every interface is hand-constructed with optimized TypeScript, fully typed properties, semantic nesting, and lightning-fast asset pipelines.
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-zinc-50 p-8 rounded-xl border border-zinc-100 hover:border-zinc-350 transition-all flex flex-col gap-6">
+              <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-zinc-200 shadow-sm">
+                <i data-lucide="layers" class="w-6 h-6 text-zinc-950"></i>
+              </div>
+              <div>
+                <h3 class="font-display font-semibold text-lg text-zinc-950 mb-2">Ergonomic Architecture</h3>
+                <p class="font-sans text-sm text-zinc-600 leading-relaxed">
+                  We build with logical screen density, ensuring accessibility compliance, full mobile responsive ergonomics, and high readability index.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio Projects Section (with triggers for Modal details) -->
+      <section class="py-24 bg-zinc-50">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-16 gap-4">
+            <div>
+              <span class="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-3">Recent Deployments</span>
+              <h2 class="font-display text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight">
+                Selected Works
+              </h2>
+            </div>
+            <a href="services.html" class="group flex items-center gap-1.5 font-display text-sm font-semibold text-zinc-950 hover:opacity-80 transition-opacity">
+              See Service Capabilities
+              <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="group bg-white rounded-xl border border-zinc-150 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
+              <div class="relative aspect-[16/10] overflow-hidden bg-zinc-100">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Aether Capital" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerpolicy="no-referrer">
+                <div class="absolute top-4 left-4 font-mono text-[9px] font-extrabold uppercase tracking-widest bg-zinc-950 text-white px-2.5 py-1 rounded">
+                  2026
+                </div>
+              </div>
+              <div class="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <span class="font-mono text-[10px] text-zinc-500 uppercase tracking-widest block mb-1">Design & Engineering Identity</span>
+                  <h3 class="font-display font-bold text-xl text-zinc-950 mb-3 group-hover:text-zinc-800">Aether Capital</h3>
+                  <p class="font-sans text-sm text-zinc-650 leading-relaxed mb-6">
+                    A complete brand visual system and high-contrast responsive interface for Stockholm's leading investment network.
+                  </p>
+                </div>
+                <button onclick="openProjectModal('proj1')" class="w-full py-3 bg-zinc-50 hover:bg-zinc-950 hover:text-white text-zinc-805 text-xs font-bold uppercase tracking-widest rounded-lg transition-colors cursor-pointer flex items-center justify-center gap-2">
+                  Examine Project
+                  <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="group bg-white rounded-xl border border-zinc-150 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
+              <div class="relative aspect-[16/10] overflow-hidden bg-zinc-100">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Verve Smart Logistics" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerpolicy="no-referrer">
+                <div class="absolute top-4 left-4 font-mono text-[9px] font-extrabold uppercase tracking-widest bg-zinc-950 text-white px-2.5 py-1 rounded">
+                  2025
+                </div>
+              </div>
+              <div class="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <span class="font-mono text-[10px] text-zinc-500 uppercase tracking-widest block mb-1">Interactive Dashboard Ecology</span>
+                  <h3 class="font-display font-bold text-xl text-zinc-950 mb-3 group-hover:text-zinc-800">Verve Smart Logistics</h3>
+                  <p class="font-sans text-sm text-zinc-650 leading-relaxed mb-6">
+                    A real-time routing platform emphasizing visual data hierarchy, typography tracking, and low-latency rendering grids.
+                  </p>
+                </div>
+                <button onclick="openProjectModal('proj2')" class="w-full py-3 bg-zinc-50 hover:bg-zinc-950 hover:text-white text-zinc-805 text-xs font-bold uppercase tracking-widest rounded-lg transition-colors cursor-pointer flex items-center justify-center gap-2">
+                  Examine Project
+                  <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="group bg-white rounded-xl border border-zinc-150 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
+              <div class="relative aspect-[16/10] overflow-hidden bg-zinc-100">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Helix Autonomous Lab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerpolicy="no-referrer">
+                <div class="absolute top-4 left-4 font-mono text-[9px] font-extrabold uppercase tracking-widest bg-zinc-950 text-white px-2.5 py-1 rounded">
+                  2025
+                </div>
+              </div>
+              <div class="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <span class="font-mono text-[10px] text-zinc-500 uppercase tracking-widest block mb-1">Web3 & Node Framework System</span>
+                  <h3 class="font-display font-bold text-xl text-zinc-950 mb-3 group-hover:text-zinc-800">Helix Autonomous Lab</h3>
+                  <p class="font-sans text-sm text-zinc-650 leading-relaxed mb-6">
+                    An architectural showcase of physical biotech installations translated to WebGL-immersed web controls.
+                  </p>
+                </div>
+                <button onclick="openProjectModal('proj3')" class="w-full py-3 bg-zinc-50 hover:bg-zinc-950 hover:text-white text-zinc-805 text-xs font-bold uppercase tracking-widest rounded-lg transition-colors cursor-pointer flex items-center justify-center gap-2">
+                  Examine Project
+                  <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Direct CTA -->
+      <section class="py-24 bg-zinc-950 text-white relative">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+          <span class="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-4">Are you ready to build?</span>
+          <h2 class="font-display text-3xl sm:text-5xl font-bold tracking-tight mb-8">
+            Let's construct a premium digital presence for your brand.
+          </h2>
+          <p class="font-sans text-md text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-10">
+            Send us your core project brief. Our engineers and designers will construct a comprehensive timeline and visual prototype within 24 hours.
+          </p>
+          <a href="contact.html" class="group inline-flex items-center gap-2.5 px-8 py-4 bg-white hover:bg-zinc-200 text-zinc-950 font-display text-xs font-bold uppercase tracking-widest rounded-lg transition-colors">
+            Initiate Project Brief
+            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Project Dialog Modal (Initially Container is Hidden) -->
+    <div id="project-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4" onclick="closeProjectModal()">
+      <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-zinc-200" onclick="event.stopPropagation()">
+        
+        <!-- Modal Top Frame -->
+        <div class="relative aspect-[16/9] bg-zinc-950">
+          <img id="modal-img" src="" alt="Project Presentation" class="w-full h-full object-cover" referrerpolicy="no-referrer">
+          <button onclick="closeProjectModal()" class="absolute top-4 right-4 p-2.5 bg-black/60 hover:bg-black/95 text-white rounded-full transition-colors cursor-pointer" aria-label="Close modal">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Modal Text Details -->
+        <div class="p-8 text-left">
+          <div class="flex justify-between items-start mb-4 gap-4">
+            <div>
+              <span id="modal-category" class="font-mono text-[11px] font-semibold text-zinc-500 uppercase tracking-widest">Category</span>
+              <h3 id="modal-title" class="font-display font-black text-2xl text-zinc-950 mt-1">Project Title</h3>
+            </div>
+            <div id="modal-year" class="font-mono text-sm font-semibold text-zinc-400">Year</div>
+          </div>
+
+          <div class="h-[1px] bg-zinc-100 my-5"></div>
+
+          <p id="modal-description" class="font-sans text-sm text-zinc-650 leading-relaxed mb-6">
+            Detailed case study content...
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 bg-zinc-50 p-4 rounded-lg mb-8">
+            <div>
+              <span class="font-mono text-[9px] uppercase tracking-wider text-zinc-500 block">Development Tech</span>
+              <span class="text-xs font-medium text-zinc-800">HTML5, Tailwind CSS, Vanilla JS, Lucide</span>
+            </div>
+            <div>
+              <span class="font-mono text-[9px] uppercase tracking-wider text-zinc-500 block">Performance Index</span>
+              <span class="text-xs font-medium text-zinc-800">100/100 Mobile Responsiveness</span>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <a href="contact.html" class="flex-1 py-3 bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-bold uppercase tracking-widest rounded-lg transition-colors text-center inline-block">
+              Request Similar System
+            </a>
+            <button onclick="closeProjectModal()" class="px-6 py-3 border border-zinc-200 hover:bg-zinc-50 text-zinc-800 text-xs font-bold uppercase tracking-widest rounded-lg transition-colors cursor-pointer text-center">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Navigation -->
+    <footer class="bg-zinc-950 text-white pt-20 pb-10 border-t border-zinc-900">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-zinc-800">
+          
+          <!-- Column 1: Brand Info -->
+          <div class="md:col-span-5 flex flex-col gap-6">
+            <div class="flex items-center gap-2.5">
+              <div class="w-10 h-10 bg-white flex items-center justify-center rounded-lg">
+                <i data-lucide="sparkles" class="w-5 h-5 text-zinc-950"></i>
+              </div>
+              <div>
+                <span class="font-display font-bold text-lg tracking-tight block text-white">Vanguard</span>
+                <span class="font-mono text-[9px] font-semibold text-zinc-400 tracking-widest uppercase block -mt-1">Digital Studio</span>
+              </div>
+            </div>
+            
+            <p class="font-sans text-sm text-zinc-400 leading-relaxed max-w-sm">
+              We design and construct premium physical and virtual interfaces. Simple layout aesthetics crafted for exceptional organizations globally.
+            </p>
+            
+            <div class="flex flex-col gap-1.5 mt-2">
+              <span class="font-mono text-[10px] uppercase text-zinc-500 tracking-widest">Global Headquarters</span>
+              <span class="text-xs text-zinc-300">85 Swede Avenue, Penthouse Level, Stockholm</span>
+            </div>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div class="md:col-span-3 flex flex-col gap-5">
+            <h4 class="font-display text-xs uppercase font-extrabold tracking-widest text-zinc-300">Sitemap</h4>
+            <ul class="flex flex-col gap-3">
+              <li><a href="index.html" class="text-sm text-zinc-400 hover:text-white transition-colors">Home Mainframe</a></li>
+              <li><a href="about.html" class="text-sm text-zinc-400 hover:text-white transition-colors">Our Philosophy & Story</a></li>
+              <li><a href="services.html" class="text-sm text-zinc-400 hover:text-white transition-colors">Digital Craft Catalog</a></li>
+              <li><a href="contact.html" class="text-sm text-zinc-400 hover:text-white transition-colors">Initiate Project Brief</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Email newsletter dispatch -->
+          <div class="md:col-span-4 flex flex-col gap-5">
+            <h4 class="font-display text-xs uppercase font-extrabold tracking-widest text-zinc-300">Studio Dispatch</h4>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              Subscribe to the Sentinel Journal—our monthly editorial regarding web standards, layout ergonomics, and visual code.
+            </p>
+            
+            <div id="newsletter-success" class="hidden bg-zinc-900 border border-emerald-500/30 text-emerald-400 rounded-lg p-3.5 flex items-center gap-3 transition-all">
+              <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0"></i>
+              <span class="text-xs font-semibold">Subscription finalized. Welcome aboard.</span>
+            </div>
+
+            <form id="newsletter-form" onsubmit="submitNewsletter(event)" class="flex gap-2">
+              <div class="relative flex-1">
+                <i data-lucide="mail" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500"></i>
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter email address"
+                  id="newsletter-email"
+                  class="w-full pl-10 pr-4 py-2.5 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 focus:border-white focus:outline-none rounded-lg text-xs text-white transition-colors placeholder:text-zinc-500"
+                />
+              </div>
+              <button
+                type="submit"
+                class="px-4 py-2.5 bg-white hover:bg-zinc-200 text-zinc-950 font-semibold rounded-lg transition-colors cursor-pointer flex items-center justify-center"
+                aria-label="Subscribe"
+              >
+                <i data-lucide="send" class="w-4 h-4"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Footer Bottom Bar -->
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="font-mono text-[10px] text-zinc-500">
+            © 2026 Vanguard. Constructed in compliance with static HTML & CSS layout standards.
+          </p>
+          
+          <div class="flex gap-6 font-mono text-[10px] text-zinc-400">
+            <span class="tracking-wide">UTC 10:31:23</span>
+            <span class="text-zinc-600">|</span>
+            <a href="#main-navbar" class="hover:underline">STAY GROUNDED</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Icon Generation and Interactive Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      // Initialize Icons
+      lucide.createIcons();
+
+      // Navbar Scroll Styling Controller
+      window.addEventListener('scroll', () => {
+        const header = document.getElementById('main-navbar');
+        if (window.scrollY > 10) {
+          header.classList.remove('bg-transparent', 'border-transparent');
+          header.classList.add('bg-white/90', 'backdrop-blur-md', 'border-zinc-100', 'shadow-sm');
+        } else {
+          header.classList.add('bg-transparent', 'border-transparent');
+          header.classList.remove('bg-white/90', 'backdrop-blur-md', 'border-zinc-100', 'shadow-sm');
+        }
+      });
+
+      // Mobile Dropdown Toggle
+      const mobileTrigger = document.getElementById('mobile-menu-trigger');
+      const mobileDropdown = document.getElementById('mobile-dropdown');
+      const menuIcon = document.getElementById('menu-icon');
+
+      mobileTrigger.addEventListener('click', () => {
+        const isOpen = !mobileDropdown.classList.contains('hidden');
+        if (isOpen) {
+          mobileDropdown.classList.add('hidden');
+          mobileDropdown.classList.remove('flex');
+          menuIcon.setAttribute('data-lucide', 'menu');
+        } else {
+          mobileDropdown.classList.remove('hidden');
+          mobileDropdown.classList.add('flex');
+          menuIcon.setAttribute('data-lucide', 'x');
+        }
+        lucide.createIcons();
+      });
+
+      // Modal Data Objects
+      const projectsData = {
+        proj1: {
+          title: "Aether Capital",
+          category: "Design & Engineering Identity",
+          year: "2026",
+          image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+          description: "A complete brand visual system and high-contrast responsive interface for Stockholm's leading investment network. Built entirely with grid ergonomics and clean fluid breakpoints on mobile dashboards."
+        },
+        proj2: {
+          title: "Verve Smart Logistics",
+          category: "Interactive Dashboard Ecology",
+          year: "2025",
+          image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+          description: "A real-time routing platform emphasizing visual data hierarchy, typography tracking, and low-latency rendering grids. Fully responsive on portable tablet devices and smart terminals."
+        },
+        proj3: {
+          title: "Helix Autonomous Lab",
+          category: "Web3 & Node Framework System",
+          year: "2025",
+          image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+          description: "An architectural showcase of physical biotech installations translated to WebGL-immersed web controls. Hand-constructed with robust accessibility and fluid responsive margins."
+        }
+      };
+
+      // Modal Triggers
+      function openProjectModal(id) {
+        const data = projectsData[id];
+        if (!data) return;
+
+        document.getElementById('modal-img').src = data.image;
+        document.getElementById('modal-title').textContent = data.title;
+        document.getElementById('modal-category').textContent = data.category;
+        document.getElementById('modal-year').textContent = data.year;
+        document.getElementById('modal-description').textContent = data.description;
+
+        const modal = document.getElementById('project-modal');
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+
+      function closeProjectModal() {
+        const modal = document.getElementById('project-modal');
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+
+      // Newsletter form submission handling
+      function submitNewsletter(e) {
+        e.preventDefault();
+        const email = document.getElementById('newsletter-email').value;
+        if (email.trim() !== '') {
+          document.getElementById('newsletter-form').classList.add('hidden');
+          document.getElementById('newsletter-success').classList.remove('hidden');
+        }
+      }
+    </script>
   </body>
 </html>
-

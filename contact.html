@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact & Technical Briefing — Vanguard</title>
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stable Tailwind CSS CDN v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    <style type="text/css">
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #fafafa;
+        color: #171717;
+      }
+      .font-display {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+      /* Preload scrollbars styling */
+      .scrollbar-thin::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-thumb {
+        background: #d4d4d8;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col bg-zinc-50 relative" onload="onContactPageLoaded()">
+
+    <!-- Fixed Success Slide Toast Alert (Hidden Initially) -->
+    <div id="toast-notification" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 transform -translate-y-24 opacity-0 transition-all duration-500 ease-out max-w-md w-[92vw] bg-zinc-950 text-white border border-zinc-850 p-4 rounded-xl shadow-2xl flex items-start gap-3.5">
+      <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+        <i data-lucide="check" class="w-4.5 h-4.5"></i>
+      </div>
+      <div class="flex-grow">
+        <span class="font-display text-sm font-bold block mb-0.5">Brief Authorized Successfully</span>
+        <span class="text-xs text-zinc-400 block leading-relaxed">
+          Your project brief has been recorded securely inside this browser's terminal registers.
+        </span>
+      </div>
+      <button onclick="hideSuccessToast()" class="text-zinc-500 hover:text-white transition-colors cursor-pointer" aria-label="Dismiss">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- Header Navigation -->
+    <header id="main-navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent border-b border-transparent">
+      <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 text-black hover:opacity-85 transition-opacity group">
+          <div class="w-10 h-10 bg-zinc-950 flex items-center justify-center rounded-lg group-hover:rotate-6 transition-transform">
+            <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+          </div>
+          <div class="text-left">
+            <span class="font-display font-bold text-lg tracking-tight block">Vanguard</span>
+            <span class="font-mono text-[9px] font-semibold text-zinc-500 tracking-widest uppercase block -mt-1">Digital Studio</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-500 hover:text-zinc-950 transition-colors">
+            Home
+          </a>
+          <a href="about.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-500 hover:text-zinc-950 transition-colors">
+            About
+          </a>
+          <a href="services.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-500 hover:text-zinc-950 transition-colors">
+            Services
+          </a>
+          <a href="contact.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-950">
+            Contact
+            <div class="absolute bottom-0 left-0 w-full h-[2px] bg-zinc-950 rounded-full"></div>
+          </a>
+        </nav>
+
+        <!-- CTA Trigger -->
+        <div class="hidden md:block">
+          <a href="contact.html" class="px-5 py-2.5 bg-zinc-950 hover:bg-zinc-805 text-white font-display text-xs font-semibold uppercase tracking-widest rounded-lg transition-colors inline-block text-center">
+            Start Project
+          </a>
+        </div>
+
+        <!-- Mobile Menu Trigger -->
+        <button id="mobile-menu-trigger" class="p-2 md:hidden text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors cursor-pointer" aria-label="Toggle Menu">
+          <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-dropdown" class="hidden md:hidden absolute top-20 left-0 w-full bg-white border-b border-zinc-250 shadow-xl flex-col p-6 gap-4">
+        <a href="index.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg text-zinc-650 hover:bg-zinc-55 hover:text-zinc-950 transition-colors">
+          Home
+        </a>
+        <a href="about.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg text-zinc-650 hover:bg-zinc-55 hover:text-zinc-950 transition-colors">
+          About
+        </a>
+        <a href="services.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg text-zinc-650 hover:bg-zinc-55 hover:text-zinc-950 transition-colors">
+          Services
+        </a>
+        <a href="contact.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg bg-zinc-950 text-white">
+          Contact
+        </a>
+        <div class="h-[1px] bg-zinc-100 my-2"></div>
+        <a href="contact.html" class="w-full py-3.5 bg-zinc-950 text-white font-display text-sm font-bold tracking-wider uppercase rounded-lg transition-colors block text-center">
+          Start Project
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-20">
+      
+      <!-- Briefing Header Intro section -->
+      <section class="pt-28 pb-12 bg-gradient-to-b from-zinc-50 to-white">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="max-w-3xl">
+            <span class="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-3">Technical Onboarding</span>
+            <h1 class="font-display text-4xl sm:text-5xl font-bold text-zinc-950 tracking-tight leading-none mb-6">
+              Initiate Project Brief Workspace.
+            </h1>
+            <p class="font-sans text-md text-zinc-600 leading-relaxed">
+              Construct a detailed description of your layout goals. Our partners will analyze the visual systems and respond with logical timescales and strict scope projections within 24 hours.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Form and Details Grid -->
+      <section class="py-16 bg-white border-t border-zinc-150">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            <!-- Left inputs panel Form (7 cols) -->
+            <div class="lg:col-span-7 bg-zinc-50 p-6 sm:p-10 rounded-xl border border-zinc-200">
+              <h3 class="font-display font-bold text-xl text-zinc-950 mb-1.5">Brief Metadata Coordinates</h3>
+              <p class="font-mono text-[11px] text-zinc-400 mb-8 uppercase tracking-widest">
+                All fields required to align technical constraints.
+              </p>
+
+              <form id="project-brief-form" onsubmit="submitProjectBrief(event)" class="flex flex-col gap-6">
+                <!-- Row: Full Name + Company Email -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label for="frm-name" class="font-mono text-[9px] uppercase tracking-wider text-zinc-500 block mb-2 font-bold">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      id="frm-name"
+                      placeholder="e.g. Erik Karlsson"
+                      class="w-full bg-white border border-zinc-250 hover:border-zinc-400 focus:border-zinc-950 focus:outline-none px-4 py-3 rounded-lg text-sm transition-colors text-zinc-950 placeholder:text-zinc-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label for="frm-email" class="font-mono text-[9px] uppercase tracking-wider text-zinc-500 block mb-2 font-bold">
+                      Company Email
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      id="frm-email"
+                      placeholder="e.g. erik@company.se"
+                      class="w-full bg-white border border-zinc-250 hover:border-zinc-400 focus:border-zinc-950 focus:outline-none px-4 py-3 rounded-lg text-sm transition-colors text-zinc-950 placeholder:text-zinc-400"
+                    />
+                  </div>
+                </div>
+
+                <!-- Row: Organization URL + Category Selector -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label for="frm-url" class="font-mono text-[9px] uppercase tracking-wider text-zinc-500 block mb-2 font-bold">
+                      Current Site URL (Optional)
+                    </label>
+                    <input
+                      type="url"
+                      id="frm-url"
+                      placeholder="e.g. https://company.se"
+                      class="w-full bg-white border border-zinc-250 hover:border-zinc-400 focus:border-zinc-950 focus:outline-none px-4 py-3 rounded-lg text-sm transition-colors text-zinc-950 placeholder:text-zinc-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label for="frm-category" class="font-mono text-[9px] uppercase tracking-wider text-zinc-500 block mb-2 font-bold">
+                      Elected Category Scope
+                    </label>
+                    <div class="relative">
+                      <select
+                        required
+                        id="frm-category"
+                        class="w-full bg-white border border-zinc-250 hover:border-zinc-400 focus:border-zinc-950 focus:outline-none px-4 py-3 rounded-lg text-sm transition-colors text-zinc-950 appearance-none font-sans cursor-pointer"
+                      >
+                        <option value="brand">Visual Brand Architecture ($3,500+)</option>
+                        <option value="code" selected>Premium Static Web Construction ($5,000+)</option>
+                        <option value="audit">Interaction Auditing ($2,900+)</option>
+                        <option value="multi">Universal Suite & Custom Combo</option>
+                      </select>
+                      <i data-lucide="chevron-down" class="absolute right-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-zinc-500 pointer-events-none"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Large Textarea: Narrative -->
+                <div>
+                  <div class="flex justify-between items-center mb-2">
+                    <label for="frm-narrative" class="font-mono text-[9px] uppercase tracking-wider text-zinc-500 block font-bold">
+                      Brief Narrative
+                    </label>
+                    <span id="lbl-narrative-char" class="font-mono text-[9px] text-zinc-405">
+                      Enter target description
+                    </span>
+                  </div>
+                  <textarea
+                    required
+                    id="frm-narrative"
+                    rows="8"
+                    placeholder="Specify physical context, design goals, target page counts, performance priorities, and any references to your ideal aesthetic pairings..."
+                    class="w-full bg-white border border-zinc-250 hover:border-zinc-400 focus:border-zinc-950 focus:outline-none px-4 py-3.5 rounded-lg text-sm transition-colors text-zinc-950 placeholder:text-zinc-405 leading-relaxed"
+                  ></textarea>
+                </div>
+
+                <!-- Form CTA -->
+                <button
+                  type="submit"
+                  class="w-full py-4 bg-zinc-950 hover:bg-zinc-800 text-white font-display text-xs font-bold uppercase tracking-widest rounded-lg transition-colors cursor-pointer flex items-center justify-center gap-2"
+                >
+                  Authorize Project Brief
+                  <i data-lucide="check" class="w-4 h-4"></i>
+                </button>
+              </form>
+            </div>
+
+            <!-- Right Details Box (5 cols) -->
+            <div class="lg:col-span-5 flex flex-col gap-10">
+              
+              <!-- Direct Contact Credentials -->
+              <div class="bg-zinc-50 p-8 rounded-xl border border-zinc-200">
+                <h4 class="font-mono text-[10px] uppercase font-bold text-zinc-500 tracking-wider mb-5">Studio Coordinator Info</h4>
+                
+                <div class="flex flex-col gap-6">
+                  <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-lg bg-zinc-950 text-white flex items-center justify-center flex-shrink-0">
+                      <i data-lucide="mail" class="w-4.5 h-4.5"></i>
+                    </div>
+                    <div>
+                      <span class="font-mono text-[9px] uppercase tracking-wider text-zinc-500 block">General Inquiries</span>
+                      <a href="mailto:hello@vanguardstudio.se" class="text-xs font-bold text-zinc-955 hover:underline">hello@vanguardstudio.se</a>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-lg bg-zinc-950 text-white flex items-center justify-center flex-shrink-0">
+                      <i data-lucide="phone" class="w-4.5 h-4.5"></i>
+                    </div>
+                    <div>
+                      <span class="font-mono text-[9px] uppercase tracking-wider text-zinc-500 block">Stockholm Switchboard</span>
+                      <span class="text-xs font-bold text-zinc-955">+46 8 505 12 900</span>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-lg bg-zinc-950 text-white flex items-center justify-center flex-shrink-0">
+                      <i data-lucide="map-pin" class="w-4.5 h-4.5"></i>
+                    </div>
+                    <div>
+                      <span class="font-mono text-[9px] uppercase tracking-wider text-zinc-50s block">Physical Site Location</span>
+                      <span class="text-xs font-bold text-zinc-955 block">Swede Avenue 85, Penthouse</span>
+                      <span class="text-[9px] font-mono text-zinc-405">Stockholm, Sweden</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live Submission list Terminal (stored in localStorage) -->
+              <div class="bg-zinc-950 text-white p-6 rounded-xl border border-zinc-800">
+                <div class="flex justify-between items-center mb-4">
+                  <div class="flex items-center gap-2">
+                    <i data-lucide="terminal" class="w-4.5 h-4.5 text-zinc-400"></i>
+                    <span class="font-mono text-[10px] text-zinc-400 uppercase tracking-widest font-extrabold">Brief Terminal Log</span>
+                  </div>
+                  <button onclick="clearAllInquiries()" class="font-mono text-[8px] uppercase tracking-wider text-zinc-500 hover:text-red-400 transition-colors cursor-pointer bg-none border-none">
+                    Purge All
+                  </button>
+                </div>
+                
+                <p class="font-sans text-[11px] text-zinc-500 leading-relaxed mb-4">
+                  All authorized project briefs are securely loaded in your client-side workspace registry database. Take action directly inside this console.
+                </p>
+
+                <!-- Scrollable submission container box -->
+                <div id="submissions-list-holder" class="flex flex-col gap-2.5 max-h-[290px] overflow-y-auto scrollbar-thin pr-1">
+                  <!-- Generated dynamically via JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Detailed View Brief Overlay (Hidden Initially) -->
+    <div id="brief-detail-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4" onclick="closeBriefDetailModal()">
+      <div class="bg-white rounded-xl max-w-xl w-full p-8 max-h-[85vh] overflow-y-auto shadow-2xl border border-zinc-200 text-left" onclick="event.stopPropagation()">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <span class="font-mono text-[10px] uppercase font-bold text-zinc-500 tracking-wider">Review Registered Proposal</span>
+            <h3 id="detail-modal-name" class="font-display font-black text-xl text-zinc-950 mt-1">Erik Karlsson</h3>
+          </div>
+          <button onclick="closeBriefDetailModal()" class="text-zinc-400 hover:text-zinc-950 transition-colors cursor-pointer" aria-label="Close">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <div class="h-[1px] bg-zinc-100 my-4"></div>
+
+        <div class="grid grid-cols-2 gap-4 mb-5 text-xs bg-zinc-50 p-3 rounded-lg">
+          <div>
+            <span class="font-mono text-[9px] uppercase tracking-widest text-zinc-400 block">Elected Category</span>
+            <span id="detail-modal-category" class="font-medium text-zinc-800">Premium Static System</span>
+          </div>
+          <div>
+            <span class="font-mono text-[9px] uppercase tracking-widest text-zinc-400 block">Email Coordinates</span>
+            <span id="detail-modal-email" class="font-medium text-zinc-800">erik@company.se</span>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <span class="font-mono text-[9px] uppercase tracking-widest text-zinc-400 block mb-1.5">Elected Narrative</span>
+          <div class="bg-zinc-50 p-4 rounded-lg font-mono text-[11px] text-zinc-700 whitespace-pre-wrap leading-relaxed max-h-[220px] overflow-y-auto" id="detail-modal-narrative">
+            Proposal description
+          </div>
+        </div>
+
+        <button onclick="closeBriefDetailModal()" class="w-full py-3 bg-zinc-950 hover:bg-zinc-850 text-white text-xs font-bold uppercase tracking-widest rounded-lg transition-colors cursor-pointer text-center">
+          Return To Workspace
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer Navigation -->
+    <footer class="bg-zinc-950 text-white pt-20 pb-10 border-t border-zinc-900">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-zinc-800">
+          
+          <!-- Column 1: Brand Info -->
+          <div class="md:col-span-5 flex flex-col gap-6">
+            <div class="flex items-center gap-2.5">
+              <div class="w-10 h-10 bg-white flex items-center justify-center rounded-lg">
+                <i data-lucide="sparkles" class="w-5 h-5 text-zinc-950"></i>
+              </div>
+              <div>
+                <span class="font-display font-bold text-lg tracking-tight block text-white">Vanguard</span>
+                <span class="font-mono text-[9px] font-semibold text-zinc-405 tracking-widest uppercase block -mt-1">Digital Studio</span>
+              </div>
+            </div>
+            
+            <p class="font-sans text-sm text-zinc-405 leading-relaxed max-w-sm">
+              We design and construct premium physical and virtual interfaces. Simple layout aesthetics crafted for exceptional organizations globally.
+            </p>
+            
+            <div class="flex flex-col gap-1.5 mt-2">
+              <span class="font-mono text-[10px] uppercase text-zinc-500 tracking-widest">Global Headquarters</span>
+              <span class="text-xs text-zinc-300">85 Swede Avenue, Penthouse Level, Stockholm</span>
+            </div>
+          </div>
+
+          <!-- Column 2: Sitemap Quick Links -->
+          <div class="md:col-span-3 flex flex-col gap-5">
+            <h4 class="font-display text-xs uppercase font-extrabold tracking-widest text-zinc-300">Sitemap</h4>
+            <ul class="flex flex-col gap-3">
+              <li><a href="index.html" class="text-sm text-zinc-405 hover:text-white transition-colors">Home Mainframe</a></li>
+              <li><a href="about.html" class="text-sm text-zinc-405 hover:text-white transition-colors">Our Philosophy & Story</a></li>
+              <li><a href="services.html" class="text-sm text-zinc-405 hover:text-white transition-colors">Digital Craft Catalog</a></li>
+              <li><a href="contact.html" class="text-sm text-zinc-405 hover:text-white transition-colors">Initiate Project Brief</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Email newsletter dispatch -->
+          <div class="md:col-span-4 flex flex-col gap-5">
+            <h4 class="font-display text-xs uppercase font-extrabold tracking-widest text-zinc-300">Studio Dispatch</h4>
+            <p class="text-xs text-zinc-405 leading-relaxed">
+              Subscribe to the Sentinel Journal—our monthly editorial regarding web standards, layout ergonomics, and visual code.
+            </p>
+            
+            <div id="newsletter-success" class="hidden bg-zinc-900 border border-emerald-500/30 text-emerald-400 rounded-lg p-3.5 flex items-center gap-3 transition-all">
+              <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0"></i>
+              <span class="text-xs font-semibold">Subscription finalized. Welcome aboard.</span>
+            </div>
+
+            <form id="newsletter-form" onsubmit="submitNewsletter(event)" class="flex gap-2">
+              <div class="relative flex-1">
+                <i data-lucide="mail" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500"></i>
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter email address"
+                  id="newsletter-email"
+                  class="w-full pl-10 pr-4 py-2.5 bg-zinc-900 border border-zinc-800 hover:border-zinc-705 focus:border-white focus:outline-none rounded-lg text-xs text-white transition-colors placeholder:text-zinc-500"
+                />
+              </div>
+              <button
+                type="submit"
+                class="px-4 py-2.5 bg-white hover:bg-zinc-200 text-zinc-950 font-semibold rounded-lg transition-colors cursor-pointer flex items-center justify-center"
+                aria-label="Subscribe"
+              >
+                <i data-lucide="send" class="w-4 h-4"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Footer Bottom Bar -->
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="font-mono text-[10px] text-zinc-500">
+            © 2026 Vanguard. Constructed in compliance with static HTML & CSS layout standards.
+          </p>
+          
+          <div class="flex gap-6 font-mono text-[10px] text-zinc-400">
+            <span class="tracking-wide">UTC 10:31:23</span>
+            <span class="text-zinc-600">|</span>
+            <a href="#main-navbar" class="hover:underline">STAY GROUNDED</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Icon Generation and Interactive Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      // Initialize Icons
+      lucide.createIcons();
+
+      // Navbar Scroll Controller
+      window.addEventListener('scroll', () => {
+        const header = document.getElementById('main-navbar');
+        if (window.scrollY > 10) {
+          header.classList.remove('bg-transparent', 'border-transparent');
+          header.classList.add('bg-white/90', 'backdrop-blur-md', 'border-zinc-100', 'shadow-sm');
+        } else {
+          header.classList.add('bg-transparent', 'border-transparent');
+          header.classList.remove('bg-white/90', 'backdrop-blur-md', 'border-zinc-100', 'shadow-sm');
+        }
+      });
+
+      // Mobile Menu Control
+      const mobileTrigger = document.getElementById('mobile-menu-trigger');
+      const mobileDropdown = document.getElementById('mobile-dropdown');
+      const menuIcon = document.getElementById('menu-icon');
+
+      mobileTrigger.addEventListener('click', () => {
+        const isOpen = !mobileDropdown.classList.contains('hidden');
+        if (isOpen) {
+          mobileDropdown.classList.add('hidden');
+          mobileDropdown.classList.remove('flex');
+          menuIcon.setAttribute('data-lucide', 'menu');
+        } else {
+          mobileDropdown.classList.remove('hidden');
+          mobileDropdown.classList.add('flex');
+          menuIcon.setAttribute('data-lucide', 'x');
+        }
+        lucide.createIcons();
+      });
+
+      // On Page Loaded Event Handler
+      function onContactPageLoaded() {
+        // 1. Check if there's any prefilled brief compiled from the service calculator!
+        try {
+          const prefill = localStorage.getItem('vanguard_prefilled_brief');
+          if (prefill) {
+            document.getElementById('frm-narrative').value = prefill;
+            // Clean the register so next clean enter does not repeat
+            localStorage.removeItem('vanguard_prefilled_brief');
+          }
+        } catch(err) {
+          console.error(err);
+        }
+
+        // 2. Render submissions list from localStorage
+        renderSubmissions();
+      }
+
+      // Submission List Renderer
+      function renderSubmissions() {
+        const container = document.getElementById('submissions-list-holder');
+        container.innerHTML = '';
+
+        let submissions = [];
+        try {
+          const data = localStorage.getItem('vanguard_brief_submissions');
+          if (data) {
+            submissions = JSON.parse(data);
+          }
+        } catch(err) {
+          console.error(err);
+        }
+
+        if (submissions.length === 0) {
+          container.innerHTML = `<div class="text-zinc-600 font-mono text-[9px] text-center py-10 tracking-wider">NO PROJECT BRIEFS REGISTERED IN WORKSPACE</div>`;
+          return;
+        }
+
+        // Loop through reverse order so newest shows first
+        for (let i = submissions.length - 1; i >= 0; i--) {
+          const sub = submissions[i];
+          const div = document.createElement('div');
+          div.className = "bg-zinc-900 border border-zinc-800 rounded-lg p-3 flex items-center justify-between gap-3 text-left";
+          div.innerHTML = `
+            <div class="flex-grow min-w-0">
+              <div class="flex items-center gap-1.5 mb-1">
+                <span class="font-display font-semibold text-xs text-white truncate block max-w-[120px]">${sub.name}</span>
+                <span class="font-mono text-[8px] uppercase tracking-wider bg-zinc-800 text-zinc-400 px-1.5 py-0.5 rounded">${sub.category.toUpperCase()}</span>
+              </div>
+              <p class="font-sans text-[10px] text-zinc-400 truncate">${sub.narrative}</p>
+            </div>
+            <div class="flex gap-1">
+              <button onclick="revealSubmissionDetail(${i})" class="p-1 px-2 border border-zinc-800 hover:border-zinc-650 rounded text-[9px] font-mono text-zinc-300 transition-colors cursor-pointer hover:text-white font-bold" title="See Case detail">VIEW</button>
+              <button onclick="deleteSubmission(${i})" class="p-1 text-zinc-500 hover:text-red-400 transition-colors cursor-pointer" title="Purge Record">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
+            </div>
+          `;
+          container.appendChild(div);
+        }
+      }
+
+      // Handle Submit Project Brief
+      function submitProjectBrief(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('frm-name').value;
+        const email = document.getElementById('frm-email').value;
+        const url = document.getElementById('frm-url').value;
+        const category = document.getElementById('frm-category').value;
+        const narrative = document.getElementById('frm-narrative').value;
+
+        const newBrief = { name, email, url, category, narrative };
+
+        try {
+          let submissions = [];
+          const data = localStorage.getItem('vanguard_brief_submissions');
+          if (data) {
+            submissions = JSON.parse(data);
+          }
+          submissions.push(newBrief);
+          localStorage.setItem('vanguard_brief_submissions', JSON.stringify(submissions));
+        } catch(err) {
+          console.error(err);
+        }
+
+        // Show Success slide Toast
+        showSuccessToast();
+
+        // Clear Form Input elements
+        document.getElementById('project-brief-form').reset();
+
+        // Re-render brief log
+        renderSubmissions();
+      }
+
+      // Delete brief record
+      function deleteSubmission(index) {
+        try {
+          const data = localStorage.getItem('vanguard_brief_submissions');
+          if (data) {
+            const submissions = JSON.parse(data);
+            submissions.splice(index, 1);
+            localStorage.setItem('vanguard_brief_submissions', JSON.stringify(submissions));
+          }
+        } catch(err) {
+          console.error(err);
+        }
+        renderSubmissions();
+      }
+
+      // Clear all records entirely
+      function clearAllInquiries() {
+        if (confirm("Confirm wiping entire Local Submissions list log?")) {
+          try {
+            localStorage.removeItem('vanguard_brief_submissions');
+          } catch(err) {
+            console.error(err);
+          }
+          renderSubmissions();
+        }
+      }
+
+      // Details Overlays logic
+      function revealSubmissionDetail(index) {
+        try {
+          const data = localStorage.getItem('vanguard_brief_submissions');
+          if (data) {
+            const submissions = JSON.parse(data);
+            const sub = submissions[index];
+            if (sub) {
+              document.getElementById('detail-modal-name').textContent = sub.name;
+              document.getElementById('detail-modal-category').textContent = sub.category.toUpperCase();
+              document.getElementById('detail-modal-email').textContent = sub.email;
+              document.getElementById('detail-modal-narrative').textContent = sub.narrative;
+
+              const modal = document.getElementById('brief-detail-modal');
+              modal.classList.remove('hidden');
+              document.body.classList.add('overflow-hidden');
+            }
+          }
+        } catch(err) {
+          console.error(err);
+        }
+      }
+
+      function closeBriefDetailModal() {
+        const modal = document.getElementById('brief-detail-modal');
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+
+      // Toast Animation Controllers
+      function showSuccessToast() {
+        const toast = document.getElementById('toast-notification');
+        toast.classList.remove('hidden');
+        
+        // Force Reflow
+        void toast.offsetWidth;
+        
+        toast.className = "fixed top-4 left-1/2 -translate-x-1/2 z-50 transform translate-y-0 opacity-100 transition-all duration-500 ease-out max-w-md w-[92vw] bg-zinc-950 text-white border border-zinc-850 p-4 rounded-xl shadow-2xl flex items-start gap-3.5";
+
+        // Auto collapse after 6 seconds
+        setTimeout(() => {
+          hideSuccessToast();
+        }, 6000);
+      }
+
+      function hideSuccessToast() {
+        const toast = document.getElementById('toast-notification');
+        toast.className = "fixed top-4 left-1/2 -translate-x-1/2 z-50 transform -translate-y-24 opacity-0 transition-all duration-500 ease-out max-w-md w-[92vw] bg-zinc-950 text-white border border-zinc-850 p-4 rounded-xl shadow-2xl flex items-start gap-3.5";
+      }
+
+      // Newsletter dispatch handles
+      function submitNewsletter(e) {
+        e.preventDefault();
+        const email = document.getElementById('newsletter-email').value;
+        if (email.trim() !== '') {
+          document.getElementById('newsletter-form').classList.add('hidden');
+          document.getElementById('newsletter-success').classList.remove('hidden');
+        }
+      }
+    </script>
+  </body>
+</html>

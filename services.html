@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services & Interactive Project Planner — Vanguard</title>
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stable Tailwind CSS CDN v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    <style type="text/css">
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #fafafa;
+        color: #171717;
+      }
+      .font-display {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+      /* Custom styled input range slider track */
+      input[type=range]::-webkit-slider-runnable-track {
+        background: #27272a;
+        height: 6px;
+        border-radius: 9999px;
+      }
+      input[type=range]::-webkit-slider-thumb {
+        background: #ffffff;
+        border: 1px solid #71717a;
+        border-radius: 9999px;
+        height: 18px;
+        width: 18px;
+        margin-top: -6px;
+        -webkit-appearance: none;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col bg-zinc-50 relative" onload="initCalculator()">
+
+    <!-- Header Navigation -->
+    <header id="main-navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent border-b border-transparent">
+      <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 text-black hover:opacity-85 transition-opacity group">
+          <div class="w-10 h-10 bg-zinc-950 flex items-center justify-center rounded-lg group-hover:rotate-6 transition-transform">
+            <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+          </div>
+          <div class="text-left">
+            <span class="font-display font-bold text-lg tracking-tight block">Vanguard</span>
+            <span class="font-mono text-[9px] font-semibold text-zinc-500 tracking-widest uppercase block -mt-1">Digital Studio</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-500 hover:text-zinc-950 transition-colors">
+            Home
+          </a>
+          <a href="about.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-500 hover:text-zinc-950 transition-colors">
+            About
+          </a>
+          <a href="services.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-950">
+            Services
+            <div class="absolute bottom-0 left-0 w-full h-[2px] bg-zinc-950 rounded-full"></div>
+          </a>
+          <a href="contact.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-500 hover:text-zinc-950 transition-colors">
+            Contact
+          </a>
+        </nav>
+
+        <!-- CTA Trigger -->
+        <div class="hidden md:block">
+          <a href="contact.html" class="px-5 py-2.5 bg-zinc-950 hover:bg-zinc-800 text-white font-display text-xs font-semibold uppercase tracking-widest rounded-lg transition-colors inline-block text-center">
+            Start Project
+          </a>
+        </div>
+
+        <!-- Mobile Menu Trigger -->
+        <button id="mobile-menu-trigger" class="p-2 md:hidden text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors cursor-pointer" aria-label="Toggle Menu">
+          <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-dropdown" class="hidden md:hidden absolute top-20 left-0 w-full bg-white border-b border-zinc-250 shadow-xl flex-col p-6 gap-4">
+        <a href="index.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg text-zinc-650 hover:bg-zinc-55 hover:text-zinc-950 transition-colors">
+          Home
+        </a>
+        <a href="about.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg text-zinc-650 hover:bg-zinc-55 hover:text-zinc-950 transition-colors">
+          About
+        </a>
+        <a href="services.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg bg-zinc-950 text-white">
+          Services
+        </a>
+        <a href="contact.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg text-zinc-650 hover:bg-zinc-55 hover:text-zinc-950 transition-colors">
+          Contact
+        </a>
+        <div class="h-[1px] bg-zinc-100 my-2"></div>
+        <a href="contact.html" class="w-full py-3.5 bg-zinc-950 text-white font-display text-sm font-bold tracking-wider uppercase rounded-lg transition-colors block text-center">
+          Start Project
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-20">
+      
+      <!-- Intro Section -->
+      <section class="pt-28 pb-16 bg-gradient-to-b from-zinc-50 to-white">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="max-w-3xl">
+            <span class="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-3">Service Catalog</span>
+            <h1 class="font-display text-4xl sm:text-5xl font-bold text-zinc-950 tracking-tight leading-none mb-6">
+              Our Digital Layout Capabilities.
+            </h1>
+            <p class="font-sans text-md text-zinc-600 leading-relaxed">
+              We focus purely on crafting fast, gorgeous, and responsive static-feeling website systems. We handle everything starting from typography pairings and mood definitions, to complete standards-compliant HTML, CSS, and React assemblies.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services List Detailed Cards -->
+      <section class="py-20 bg-white border-t border-zinc-150">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Service 1 -->
+            <div class="bg-zinc-50 rounded-xl border border-zinc-200 p-8 flex flex-col justify-between transition-all hover:border-zinc-300">
+              <div>
+                <div class="w-12 h-12 rounded-lg bg-zinc-950 text-white flex items-center justify-center mb-6">
+                  <i data-lucide="compass" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-display font-extrabold text-lg text-zinc-950 mb-3 leading-snug">Visual Identity & Brand Architecture</h3>
+                <p class="font-sans text-sm text-zinc-600 leading-relaxed mb-8">
+                  We construct a customized visual design language, typographical grid principles, curated color systems, and responsive logo formats to secure brand authority.
+                </p>
+                
+                <h4 class="font-mono text-[10px] uppercase tracking-widest font-extrabold text-zinc-400 mb-3 border-t border-zinc-200/60 pt-6">Included Capabilities</h4>
+                <ul class="flex flex-col gap-2.5 mb-8">
+                  <li class="flex items-center gap-2.5 text-xs text-zinc-70s">
+                    <i data-lucide="check" class="w-4 h-4 text-zinc-950 flex-shrink-0"></i>
+                    <span>Full SVG logo suite</span>
+                  </li>
+                  <li class="flex items-center gap-2.5 text-xs text-zinc-70s">
+                    <i data-lucide="check" class="w-4 h-4 text-zinc-950 flex-shrink-0"></i>
+                    <span>Typographical stylebook</span>
+                  </li>
+                  <li class="flex items-center gap-2.5 text-xs text-zinc-7s">
+                    <i data-lucide="check" class="w-4 h-4 text-zinc-950 flex-shrink-0"></i>
+                    <span>Palette tokens & rules</span>
+                  </li>
+                  <li class="flex items-center gap-2.5 text-xs text-zinc-7s">
+                    <i data-lucide="check" class="w-4 h-4 text-zinc-950 flex-shrink-0"></i>
+                    <span>Layout grid templates</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="pt-4 border-t border-zinc-200/60 flex items-center justify-between">
+                <div>
+                  <span class="font-mono text-[9px] uppercase tracking-wider text-zinc-400 block">Baseline Pricing</span>
+                  <span class="font-display font-bold text-lg text-zinc-805">$3,500</span>
+                </div>
+                <button onclick="optInService('ser-1')" class="px-4 py-2 hover:bg-zinc-950 hover:text-white border border-zinc-300 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer">
+                  Select System
+                </button>
+              </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="bg-zinc-50 rounded-xl border border-zinc-200 p-8 flex flex-col justify-between transition-all hover:border-zinc-300">
+              <div>
+                <div class="w-12 h-12 rounded-lg bg-zinc-950 text-white flex items-center justify-center mb-6">
+                  <i data-lucide="code-2" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-display font-extrabold text-lg text-zinc-950 mb-3 leading-snug">Premium Web Construction & Static Code</h3>
+                <p class="font-sans text-sm text-zinc-600 leading-relaxed mb-8">
+                  Handcrafted HTML, CSS, and TypeScript web systems utilizing React or pure layouts. High performance indices guaranteeing sub-second loading states. No bulky systems.
+                </p>
+                
+                <h4 class="font-mono text-[10px] uppercase tracking-widest font-extrabold text-zinc-400 mb-3 border-t border-zinc-200/60 pt-6">Included Capabilities</h4>
+                <ul class="flex flex-col gap-2.5 mb-8">
+                  <li class="flex items-center gap-2.5 text-xs text-zinc-7s">
+                    <i data-lucide="check" class="w-4 h-4 text-zinc-950 flex-shrink-0"></i>
+                    <span>Perfect semantic layouts</span>
+                  </li>
+                  <li class="flex items-center gap-2.5 text-xs text-zinc-7s">
+                    <i data-lucide="check" class="w-4 h-4 text-zinc-950 flex-shrink-0"></i>
+                    <span>100 scores core web vitals</span>
+                  </li>
+                  <li class="flex items-center gap-2.5 text-xs text-zinc-7s">
+                    <i data-lucide="check" class="w-4 h-4 text-zinc-950 flex-shrink-0"></i>
+                    <span>Mobile layout-first touch support</span>
+                  </li>
+                  <li class="flex items-center gap-2.5 text-xs text-zinc-7s">
+                    <i data-lucide="check" class="w-4 h-4 text-zinc-950 flex-shrink-0"></i>
+                    <span>Clean client-side indexing</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="pt-4 border-t border-zinc-200/60 flex items-center justify-between">
+                <div>
+                  <span class="font-mono text-[9px] uppercase tracking-wider text-zinc-400 block">Baseline Pricing</span>
+                  <span class="font-display font-bold text-lg text-zinc-805">$5,000</span>
+                </div>
+                <button onclick="optInService('ser-2')" class="px-4 py-2 hover:bg-zinc-950 hover:text-white border border-zinc-300 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer">
+                  Select System
+                </button>
+              </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="bg-zinc-50 rounded-xl border border-zinc-200 p-8 flex flex-col justify-between transition-all hover:border-zinc-300">
+              <div>
+                <div class="w-12 h-12 rounded-lg bg-zinc-950 text-white flex items-center justify-center mb-6">
+                  <i data-lucide="cpu" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-display font-extrabold text-lg text-zinc-950 mb-3 leading-snug">Interaction Ergonomics & Visual Auditing</h3>
+                <p class="font-sans text-sm text-zinc-600 leading-relaxed mb-8">
+                  Full restructuring of existing platforms to align with strict responsive design break points, readability constraints, and layout design balance.
+                </p>
+                
+                <h4 class="font-mono text-[10px] uppercase tracking-widest font-extrabold text-zinc-400 mb-3 border-t border-zinc-200/60 pt-6">Included Capabilities</h4>
+                <ul class="flex flex-col gap-2.5 mb-8">
+                  <li class="flex items-center gap-2.5 text-xs text-zinc-7s">
+                    <i data-lucide="check" class="w-4 h-4 text-zinc-950 flex-shrink-0"></i>
+                    <span>Ergonomic layout report</span>
+                  </li>
+                  <li class="flex items-center gap-2.5 text-xs text-zinc-7s">
+                    <i data-lucide="check" class="w-4 h-4 text-zinc-950 flex-shrink-0"></i>
+                    <span>Touch target correction</span>
+                  </li>
+                  <li class="flex items-center gap-2.5 text-xs text-zinc-7s">
+                    <i data-lucide="check" class="w-4 h-4 text-zinc-950 flex-shrink-0"></i>
+                    <span>Contrast ratio audit</span>
+                  </li>
+                  <li class="flex items-center gap-2.5 text-xs text-zinc-7s">
+                    <i data-lucide="check" class="w-4 h-4 text-zinc-950 flex-shrink-0"></i>
+                    <span>Asset loading optimizer</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="pt-4 border-t border-zinc-200/60 flex items-center justify-between">
+                <div>
+                  <span class="font-mono text-[9px] uppercase tracking-wider text-zinc-400 block">Baseline Pricing</span>
+                  <span class="font-display font-bold text-lg text-zinc-805">$2,900</span>
+                </div>
+                <button onclick="optInService('ser-3')" class="px-4 py-2 hover:bg-zinc-950 hover:text-white border border-zinc-300 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer">
+                  Select System
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Budget Simulator -->
+      <section id="budget-simulator" class="py-24 bg-zinc-900 text-white border-y border-zinc-950">
+        <div class="max-w-7xl mx-auto px-6">
+          
+          <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-3">Live Estimation Machine</span>
+            <h2 class="font-display text-3xl font-bold tracking-tight text-white mb-2">Interactive Project Planner</h2>
+            <p class="font-sans text-xs text-zinc-400 leading-relaxed">
+              Synthesize your target project configuration in real-time. Select the capabilities, determine timelines, and add features to get an immediate budget summary.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            <!-- Controls Block (7 cols) -->
+            <div class="lg:col-span-7 bg-zinc-950 p-6 sm:p-8 rounded-xl border border-zinc-800 flex flex-col gap-8">
+              
+              <!-- 1. Design Services Checkboxes -->
+              <div>
+                <span class="font-mono text-[10px] uppercase text-zinc-500 tracking-wider block mb-4 font-extrabold">
+                  01. Choose Core Design Capabilities
+                </span>
+                <div class="flex flex-col gap-3">
+                  <!-- Option 1 -->
+                  <div onclick="toggleSelection('ser-1')" id="row-ser-1" class="w-full flex items-center justify-between p-4 rounded-lg border text-left cursor-pointer transition-all bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-white">
+                    <div class="flex gap-3 items-center">
+                      <div id="chk-box-ser-1" class="w-4 h-4 rounded flex items-center justify-center border border-zinc-700 bg-transparent transition-colors">
+                        <i data-lucide="check" class="hidden w-3 h-3 text-zinc-950 stroke-[3]"></i>
+                      </div>
+                      <span class="font-display font-medium text-xs sm:text-sm block">Visual Identity & Brand Architecture</span>
+                    </div>
+                    <span class="font-mono text-xs text-zinc-450">$3,500</span>
+                  </div>
+
+                  <!-- Option 2 -->
+                  <div onclick="toggleSelection('ser-2')" id="row-ser-2" class="w-full flex items-center justify-between p-4 rounded-lg border text-left cursor-pointer transition-all bg-zinc-900 border-white text-white">
+                    <div class="flex gap-3 items-center">
+                      <div id="chk-box-ser-2" class="w-4 h-4 rounded flex items-center justify-center border border-white bg-white transition-colors">
+                        <i data-lucide="check" class="w-3 h-3 text-zinc-950 stroke-[3]" style="display: block;"></i>
+                      </div>
+                      <span class="font-display font-medium text-xs sm:text-sm block">Premium Web Construction & Static Code</span>
+                    </div>
+                    <span class="font-mono text-xs text-zinc-450">$5,000</span>
+                  </div>
+
+                  <!-- Option 3 -->
+                  <div onclick="toggleSelection('ser-3')" id="row-ser-3" class="w-full flex items-center justify-between p-4 rounded-lg border text-left cursor-pointer transition-all bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-white">
+                    <div class="flex gap-3 items-center">
+                      <div id="chk-box-ser-3" class="w-4 h-4 rounded flex items-center justify-center border border-zinc-700 bg-transparent transition-colors">
+                        <i data-lucide="check" class="hidden w-3 h-3 text-zinc-950 stroke-[3]"></i>
+                      </div>
+                      <span class="font-display font-medium text-xs sm:text-sm block">Interaction Ergonomics & Visual Auditing</span>
+                    </div>
+                    <span class="font-mono text-xs text-zinc-450">$2,900</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Page Range Slider -->
+              <div>
+                <div class="flex justify-between items-center mb-3">
+                  <span class="font-mono text-[10px] uppercase text-zinc-400 tracking-wider font-extrabold">
+                    02. Scope Scale (Page Count: <span id="lbl-page-count" class="text-white">4</span> Pages)
+                  </span>
+                  <span id="lbl-pages-added-cost" class="font-mono text-xs text-zinc-500">
+                    Baseline Rate Included
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="1"
+                  max="20"
+                  value="4"
+                  id="page-count-slider"
+                  oninput="updatePageCountSlider(this.value)"
+                  class="w-full accent-white bg-zinc-850 h-1.5 rounded-lg cursor-pointer"
+                />
+                <div class="flex justify-between font-mono text-[9px] text-zinc-650 mt-2">
+                  <span>1 Page Landing</span>
+                  <span>4 Pages Standard</span>
+                  <span>10 Pages Suite</span>
+                  <span>20 Pages Corporate</span>
+                </div>
+              </div>
+
+              <!-- 3. Delivery Urgency Toggle Buttons -->
+              <div>
+                <span class="font-mono text-[10px] uppercase text-zinc-400 tracking-wider block mb-3.5 font-extrabold">
+                  03. Timeframe Urgency
+                </span>
+                <div class="grid grid-cols-3 gap-3">
+                  
+                  <button type="button" onclick="setUrgency('flexible')" id="urgency-flexible" class="p-3 rounded-lg border text-center transition-all cursor-pointer bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-700">
+                    <span class="font-display text-xs block">Flexible</span>
+                    <span class="font-mono text-[8px] text-zinc-500 block mt-0.5">Slight Discount (-5%)</span>
+                  </button>
+
+                  <button type="button" onclick="setUrgency('standard')" id="urgency-standard" class="p-3 rounded-lg border text-center transition-all cursor-pointer bg-white border-white text-zinc-950 font-bold">
+                    <span class="font-display text-xs block">Standard</span>
+                    <span class="font-mono text-[8px] text-zinc-500 block mt-0.5">Base Pricing</span>
+                  </button>
+
+                  <button type="button" onclick="setUrgency('urgent')" id="urgency-urgent" class="p-3 rounded-lg border text-center transition-all cursor-pointer bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-700">
+                    <span class="font-display text-xs block">Urgent System</span>
+                    <span class="font-mono text-[8px] text-zinc-505 block mt-0.5">Rush Priority (+25%)</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 4. Premium Add-ons -->
+              <div>
+                <span class="font-mono text-[10px] uppercase text-zinc-400 tracking-wider block mb-3.5 font-extrabold">
+                  04. Premium Enhancements
+                </span>
+                <div class="flex flex-col gap-3">
+                  
+                  <!-- Performance guarantee add-on -->
+                  <label class="flex justify-between items-center p-3.5 bg-zinc-90 w-full rounded-lg border border-zinc-800 cursor-pointer hover:border-zinc-700">
+                    <div class="flex gap-3 items-center text-left">
+                      <input
+                        type="checkbox"
+                        id="chk-performance"
+                        checked
+                        onchange="togglePerformance(this.checked)"
+                        class="w-4 h-4 rounded accent-white cursor-pointer bg-zinc-950 mb-0.5"
+                      />
+                      <div>
+                        <span class="font-display text-xs font-semibold block text-zinc-100">100/100 Lighthouse Performance Index</span>
+                        <span class="font-sans text-[10px] text-zinc-500 block">Strict code compliance architecture guaranteeing immediate loading.</span>
+                      </div>
+                    </div>
+                    <span class="font-mono text-xs text-zinc-450 flex-shrink-0 ml-4">+$400</span>
+                  </label>
+
+                  <!-- Technical narrative design copywriting add-on -->
+                  <label class="flex justify-between items-center p-3.5 bg-zinc-90 w-full rounded-lg border border-zinc-800 cursor-pointer hover:border-zinc-700">
+                    <div class="flex gap-3 items-center text-left">
+                      <input
+                        type="checkbox"
+                        id="chk-copywriting"
+                        onchange="toggleCopywriting(this.checked)"
+                        class="w-4 h-4 rounded accent-white cursor-pointer bg-zinc-950 mb-0.5"
+                      />
+                      <div>
+                        <span class="font-display text-xs font-semibold block text-zinc-100">Technical Copywriting & Layout Auditing</span>
+                        <span class="font-sans text-[10px] text-zinc-550 block">We write all core narrative blocks, taglines, and feature content.</span>
+                      </div>
+                    </div>
+                    <span class="font-mono text-xs text-zinc-450 flex-shrink-0 ml-4">+$800</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Calculated Receipt Box Right (5 cols) -->
+            <div class="lg:col-span-12 xl:col-span-5 bg-white text-zinc-950 p-8 rounded-xl border border-zinc-200 shadow-2xl xl:sticky xl:top-28 flex flex-col justify-between min-h-[480px]">
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  <i data-lucide="bar-chart-4" class="w-5 h-5 text-zinc-500"></i>
+                  <span class="font-mono text-[10px] text-zinc-500 uppercase tracking-widest font-extrabold">Estimate Output Console</span>
+                </div>
+                
+                <h3 class="font-display font-extrabold text-2xl text-zinc-950 tracking-tight">Brief Blueprint Summary</h3>
+                <div class="h-[1px] bg-zinc-100 my-5"></div>
+
+                <div id="calculator-receipt-items" class="flex flex-col gap-4">
+                  
+                  <div class="flex justify-between">
+                    <span class="text-xs text-zinc-600 font-medium">Core Services Rate:</span>
+                    <span id="receipt-core-rate" class="font-mono text-xs font-bold">$5,000</span>
+                  </div>
+
+                  <div class="flex justify-between">
+                    <span class="text-xs text-zinc-650 font-medium font-sans">Pages Rate (<span id="receipt-page-count">4</span> Pages):</span>
+                    <span id="receipt-page-rate" class="font-mono text-xs font-bold">$0 (Baseline Included)</span>
+                  </div>
+
+                  <div class="flex justify-between">
+                    <span class="text-xs text-zinc-650 font-medium">Urgency Factor (<span id="receipt-urgency-lbl">STANDARD</span>):</span>
+                    <span id="receipt-urgency-rate" class="font-mono text-xs font-bold">Standard rate</span>
+                  </div>
+
+                  <div class="flex justify-between" id="row-receipt-perf">
+                    <span class="text-xs text-zinc-650 font-medium">Lighthouse 100 Guarantee:</span>
+                    <span class="font-mono text-xs font-bold">+$400</span>
+                  </div>
+
+                  <div class="hidden flex justify-between" id="row-receipt-copy">
+                    <span class="text-xs text-zinc-650 font-medium font-sans">Technical Copywriting:</span>
+                    <span class="font-mono text-xs font-bold">+$800</span>
+                  </div>
+
+                  <div class="h-[1px] bg-zinc-100 my-2"></div>
+                </div>
+
+                <div class="py-12 text-center text-zinc-400 italic hidden" id="calculator-placeholder">
+                  Please select at least one core capability in step 01 to initialize budget estimate.
+                </div>
+              </div>
+
+              <div>
+                <div class="mb-6 flex flex-col gap-1 text-center bg-zinc-50 p-4 rounded-lg" id="receipt-summary-holder">
+                  <span class="font-mono text-[9px] uppercase tracking-wider text-zinc-520 block">Calculated Value Investment</span>
+                  <span class="font-display font-black text-3xl text-zinc-950 tracking-tight">
+                    $<span id="total-val">5,400</span> <span class="text-xs font-medium text-zinc-500">USD</span>
+                  </span>
+                </div>
+
+                <button onclick="forwardSelectionToContact()" id="simulator-export-btn" class="w-full group py-4 flex items-center justify-center gap-2 bg-zinc-950 hover:bg-zinc-805 text-white font-display text-xs font-bold uppercase tracking-widest rounded-lg transition-colors cursor-pointer">
+                  Forward Project Brief
+                  <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform animate-pulse"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Navigation -->
+    <footer class="bg-zinc-950 text-white pt-20 pb-10 border-t border-zinc-900">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-zinc-800">
+          
+          <!-- Column 1: Brand Info -->
+          <div class="md:col-span-5 flex flex-col gap-6">
+            <div class="flex items-center gap-2.5">
+              <div class="w-10 h-10 bg-white flex items-center justify-center rounded-lg">
+                <i data-lucide="sparkles" class="w-5 h-5 text-zinc-950"></i>
+              </div>
+              <div>
+                <span class="font-display font-bold text-lg tracking-tight block text-white">Vanguard</span>
+                <span class="font-mono text-[9px] font-semibold text-zinc-404 tracking-widest uppercase block -mt-1">Digital Studio</span>
+              </div>
+            </div>
+            
+            <p class="font-sans text-sm text-zinc-404 leading-relaxed max-w-sm">
+              We design and construct premium physical and virtual interfaces. Simple layout aesthetics crafted for exceptional organizations globally.
+            </p>
+            
+            <div class="flex flex-col gap-1.5 mt-2">
+              <span class="font-mono text-[10px] uppercase text-zinc-500 tracking-widest">Global Headquarters</span>
+              <span class="text-xs text-zinc-300">85 Swede Avenue, Penthouse Level, Stockholm</span>
+            </div>
+          </div>
+
+          <!-- Column 2: Sitemap Quick Links -->
+          <div class="md:col-span-3 flex flex-col gap-5">
+            <h4 class="font-display text-xs uppercase font-extrabold tracking-widest text-zinc-300">Sitemap</h4>
+            <ul class="flex flex-col gap-3">
+              <li><a href="index.html" class="text-sm text-zinc-404 hover:text-white transition-colors">Home Mainframe</a></li>
+              <li><a href="about.html" class="text-sm text-zinc-404 hover:text-white transition-colors">Our Philosophy & Story</a></li>
+              <li><a href="services.html" class="text-sm text-zinc-404 hover:text-white transition-colors">Digital Craft Catalog</a></li>
+              <li><a href="contact.html" class="text-sm text-zinc-404 hover:text-white transition-colors">Initiate Project Brief</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Email newsletter dispatch -->
+          <div class="md:col-span-4 flex flex-col gap-5">
+            <h4 class="font-display text-xs uppercase font-extrabold tracking-widest text-zinc-300">Studio Dispatch</h4>
+            <p class="text-xs text-zinc-404 leading-relaxed">
+              Subscribe to the Sentinel Journal—our monthly editorial regarding web standards, layout ergonomics, and visual code.
+            </p>
+            
+            <div id="newsletter-success" class="hidden bg-zinc-900 border border-emerald-500/30 text-emerald-400 rounded-lg p-3.5 flex items-center gap-3 transition-all">
+              <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0"></i>
+              <span class="text-xs font-semibold">Subscription finalized. Welcome aboard.</span>
+            </div>
+
+            <form id="newsletter-form" onsubmit="submitNewsletter(event)" class="flex gap-2">
+              <div class="relative flex-1">
+                <i data-lucide="mail" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500"></i>
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter email address"
+                  id="newsletter-email"
+                  class="w-full pl-10 pr-4 py-2.5 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 focus:border-white focus:outline-none rounded-lg text-xs text-white transition-colors placeholder:text-zinc-500"
+                />
+              </div>
+              <button
+                type="submit"
+                class="px-4 py-2.5 bg-white hover:bg-zinc-200 text-zinc-950 font-semibold rounded-lg transition-colors cursor-pointer flex items-center justify-center"
+                aria-label="Subscribe"
+              >
+                <i data-lucide="send" class="w-4 h-4"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Footer Bottom Bar -->
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="font-mono text-[10px] text-zinc-500">
+            © 2026 Vanguard. Constructed in compliance with static HTML & CSS layout standards.
+          </p>
+          
+          <div class="flex gap-6 font-mono text-[10px] text-zinc-400">
+            <span class="tracking-wide">UTC 10:31:23</span>
+            <span class="text-zinc-650">|</span>
+            <a href="#main-navbar" class="hover:underline">STAY GROUNDED</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Icon Generation and Interactive Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      // Initialize Icons
+      lucide.createIcons();
+
+      // Navbar Scroll Controller
+      window.addEventListener('scroll', () => {
+        const header = document.getElementById('main-navbar');
+        if (window.scrollY > 10) {
+          header.classList.remove('bg-transparent', 'border-transparent');
+          header.classList.add('bg-white/90', 'backdrop-blur-md', 'border-zinc-100', 'shadow-sm');
+        } else {
+          header.classList.add('bg-transparent', 'border-transparent');
+          header.classList.remove('bg-white/90', 'backdrop-blur-md', 'border-zinc-100', 'shadow-sm');
+        }
+      });
+
+      // Mobile Menu Control
+      const mobileTrigger = document.getElementById('mobile-menu-trigger');
+      const mobileDropdown = document.getElementById('mobile-dropdown');
+      const menuIcon = document.getElementById('menu-icon');
+
+      mobileTrigger.addEventListener('click', () => {
+        const isOpen = !mobileDropdown.classList.contains('hidden');
+        if (isOpen) {
+          mobileDropdown.classList.add('hidden');
+          mobileDropdown.classList.remove('flex');
+          menuIcon.setAttribute('data-lucide', 'menu');
+        } else {
+          mobileDropdown.classList.remove('hidden');
+          mobileDropdown.classList.add('flex');
+          menuIcon.setAttribute('data-lucide', 'x');
+        }
+        lucide.createIcons();
+      });
+
+      // Interactive Simulator State
+      const selectedServicesSet = new Set(['ser-2']);
+      let currentPagesCount = 4;
+      let currentTimelineUrgency = 'standard';
+      let hasPerformanceAddon = true;
+      let hasCopywritingAddon = false;
+
+      const baselineServices = {
+        'ser-1': { title: 'Visual Identity & Brand Architecture', cost: 3500 },
+        'ser-2': { title: 'Premium Web Construction & Static Code', cost: 5000 },
+        'ser-3': { title: 'Interaction Ergonomics & Visual Auditing', cost: 2900 }
+      };
+
+      function initCalculator() {
+        renderCalculatorMetrics();
+      }
+
+      function toggleSelection(id) {
+        if (selectedServicesSet.has(id)) {
+          selectedServicesSet.delete(id);
+          document.getElementById(`row-${id}`).className = "w-full flex items-center justify-between p-4 rounded-lg border text-left cursor-pointer transition-all bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-white";
+          document.getElementById(`chk-box-${id}`).className = "w-4 h-4 rounded flex items-center justify-center border border-zinc-700 bg-transparent transition-colors";
+          document.getElementById(`chk-box-${id}`).querySelector('i').style.display = "none";
+        } else {
+          selectedServicesSet.add(id);
+          document.getElementById(`row-${id}`).className = "w-full flex items-center justify-between p-4 rounded-lg border text-left cursor-pointer transition-all bg-zinc-900 border-white text-white";
+          document.getElementById(`chk-box-${id}`).className = "w-4 h-4 rounded flex items-center justify-center border border-white bg-white transition-colors";
+          document.getElementById(`chk-box-${id}`).querySelector('i').style.display = "block";
+        }
+        renderCalculatorMetrics();
+      }
+
+      // Quick trigger selector button in baseline cards
+      function optInService(id) {
+        if (!selectedServicesSet.has(id)) {
+          toggleSelection(id);
+        }
+        // Smooth scroll to the Planner
+        document.getElementById('budget-simulator').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      function updatePageCountSlider(value) {
+        currentPagesCount = Number(value);
+        document.getElementById('lbl-page-count').textContent = value;
+        document.getElementById('receipt-page-count').textContent = value;
+        
+        let extraPagesText = "Baseline Rate Included";
+        if (currentPagesCount > 4) {
+          extraPagesText = `+$${((currentPagesCount - 4) * 250).toLocaleString()} USD`;
+        }
+        document.getElementById('lbl-pages-added-cost').textContent = extraPagesText;
+        renderCalculatorMetrics();
+      }
+
+      function setUrgency(val) {
+        currentTimelineUrgency = val;
+        
+        // Style Buttons
+        ['flexible', 'standard', 'urgent'].forEach(u => {
+          const btn = document.getElementById(`urgency-${u}`);
+          if (u === val) {
+            btn.className = "p-3 rounded-lg border text-center transition-all cursor-pointer bg-white border-white text-zinc-950 font-bold";
+          } else {
+            btn.className = "p-3 rounded-lg border text-center transition-all cursor-pointer bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-700";
+          }
+        });
+
+        document.getElementById('receipt-urgency-lbl').textContent = val.toUpperCase();
+        renderCalculatorMetrics();
+      }
+
+      function togglePerformance(checked) {
+        hasPerformanceAddon = checked;
+        
+        // Sync check UI
+        document.getElementById('chk-performance').checked = checked;
+        
+        const row = document.getElementById('row-receipt-perf');
+        if (checked) {
+          row.classList.remove('hidden');
+        } else {
+          row.classList.add('hidden');
+        }
+        renderCalculatorMetrics();
+      }
+
+      function toggleCopywriting(checked) {
+        hasCopywritingAddon = checked;
+
+        // Sync check UI
+        document.getElementById('chk-copywriting').checked = checked;
+
+        const row = document.getElementById('row-receipt-copy');
+        if (checked) {
+          row.classList.remove('hidden');
+          row.classList.add('flex');
+        } else {
+          row.classList.add('hidden');
+          row.classList.remove('flex');
+        }
+        renderCalculatorMetrics();
+      }
+
+      function renderCalculatorMetrics() {
+        const count = selectedServicesSet.size;
+        const mainReceipt = document.getElementById('calculator-receipt-items');
+        const placeholder = document.getElementById('calculator-placeholder');
+        const summary = document.getElementById('receipt-summary-holder');
+        const forwardBtn = document.getElementById('simulator-export-btn');
+
+        if (count === 0) {
+          mainReceipt.classList.add('hidden');
+          mainReceipt.classList.remove('flex');
+          placeholder.classList.remove('hidden');
+          summary.classList.add('hidden');
+          
+          forwardBtn.disabled = true;
+          forwardBtn.className = "w-full py-4 flex items-center justify-center gap-2 bg-zinc-250 text-zinc-405 font-display text-xs font-bold uppercase tracking-widest rounded-lg cursor-not-allowed";
+          return;
+        }
+
+        mainReceipt.classList.remove('hidden');
+        mainReceipt.classList.add('flex');
+        placeholder.classList.add('hidden');
+        summary.classList.remove('hidden');
+
+        forwardBtn.disabled = false;
+        forwardBtn.className = "w-full group py-4 flex items-center justify-center gap-2 bg-zinc-950 hover:bg-zinc-805 text-white font-display text-xs font-bold uppercase tracking-widest rounded-lg transition-colors cursor-pointer";
+
+        // Calculate Cost
+        let sum = 0;
+        selectedServicesSet.forEach(id => {
+          sum += baselineServices[id].cost;
+        });
+
+        // Update Core rates receipt
+        document.getElementById('receipt-core-rate').textContent = `$${sum.toLocaleString()}`;
+
+        // Add additional pages
+        let pageRateCost = 0;
+        if (currentPagesCount > 4) {
+          pageRateCost = (currentPagesCount - 4) * 250;
+          document.getElementById('receipt-page-rate').textContent = `+$${pageRateCost.toLocaleString()}`;
+        } else {
+          document.getElementById('receipt-page-rate').textContent = "$0 (Baseline Included)";
+        }
+        sum += pageRateCost;
+
+        // Multiply urgency
+        let multiplierText = "Standard rate";
+        if (currentTimelineUrgency === 'flexible') {
+          sum *= 0.95;
+          multiplierText = "-5% discount";
+        } else if (currentTimelineUrgency === 'urgent') {
+          sum *= 1.25;
+          multiplierText = "+25% rush priority charge";
+        }
+        document.getElementById('receipt-urgency-rate').textContent = multiplierText;
+
+        // Add add-on premiums
+        if (hasPerformanceAddon) {
+          sum += 400;
+        }
+        if (hasCopywritingAddon) {
+          sum += 800;
+        }
+
+        const totalCost = Math.round(sum);
+        document.getElementById('total-val').textContent = totalCost.toLocaleString();
+      }
+
+      // Interactive Local Session Forwarder
+      function forwardSelectionToContact() {
+        const names = [];
+        selectedServicesSet.forEach(id => names.push(baselineServices[id].title));
+        
+        const briefNarrative = `Interested in a dynamic custom project package:
+- Elected Services: ${names.join(', ')}
+- Target Page Count: ${currentPagesCount} pages
+- Timeframe Urgency: ${currentTimelineUrgency.toUpperCase()}
+- 100 Performance Score Guarantee: ${hasPerformanceAddon ? 'YES' : 'NO'}
+- Technical Copywriting Add-on: ${hasCopywritingAddon ? 'YES' : 'NO'}
+- Calculated Budget Estimate: $${document.getElementById('total-val').textContent} USD`;
+
+        try {
+          // Preload string into LocalStorage so the contact form picks it up!
+          localStorage.setItem('vanguard_prefilled_brief', briefNarrative);
+        } catch(err) {
+          console.error(err);
+        }
+
+        // Navigate directly to contact.html
+        window.location.href = "contact.html";
+      }
+
+      // Newsletter newsletter submit
+      function submitNewsletter(e) {
+        e.preventDefault();
+        const email = document.getElementById('newsletter-email').value;
+        if (email.trim() !== '') {
+          document.getElementById('newsletter-form').classList.add('hidden');
+          document.getElementById('newsletter-success').classList.remove('hidden');
+        }
+      }
+    </script>
+  </body>
+</html>

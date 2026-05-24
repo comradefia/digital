@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Vanguard — Story, Philosophy & Architects</title>
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stable Tailwind CSS CDN v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    <style type="text/css">
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #fafafa;
+        color: #171717;
+      }
+      .font-display {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col bg-zinc-50 relative">
+
+    <!-- Header Navigation -->
+    <header id="main-navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent border-b border-transparent">
+      <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 text-black hover:opacity-85 transition-opacity group">
+          <div class="w-10 h-10 bg-zinc-950 flex items-center justify-center rounded-lg group-hover:rotate-6 transition-transform">
+            <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+          </div>
+          <div class="text-left">
+            <span class="font-display font-bold text-lg tracking-tight block">Vanguard</span>
+            <span class="font-mono text-[9px] font-semibold text-zinc-500 tracking-widest uppercase block -mt-1">Digital Studio</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-500 hover:text-zinc-950 transition-colors">
+            Home
+          </a>
+          <a href="about.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-950">
+            About
+            <div class="absolute bottom-0 left-0 w-full h-[2px] bg-zinc-950 rounded-full"></div>
+          </a>
+          <a href="services.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-500 hover:text-zinc-950 transition-colors">
+            Services
+          </a>
+          <a href="contact.html" class="font-display text-sm font-medium tracking-wide relative py-2 text-zinc-500 hover:text-zinc-950 transition-colors">
+            Contact
+          </a>
+        </nav>
+
+        <!-- CTA Trigger -->
+        <div class="hidden md:block">
+          <a href="contact.html" class="px-5 py-2.5 bg-zinc-950 hover:bg-zinc-800 text-white font-display text-xs font-semibold uppercase tracking-widest rounded-lg transition-colors inline-block text-center">
+            Start Project
+          </a>
+        </div>
+
+        <!-- Mobile Menu Trigger -->
+        <button id="mobile-menu-trigger" class="p-2 md:hidden text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors cursor-pointer" aria-label="Toggle Menu">
+          <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-dropdown" class="hidden md:hidden absolute top-20 left-0 w-full bg-white border-b border-zinc-250 shadow-xl flex-col p-6 gap-4">
+        <a href="index.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg text-zinc-650 hover:bg-zinc-55 hover:text-zinc-950 transition-colors">
+          Home
+        </a>
+        <a href="about.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg bg-zinc-950 text-white">
+          About
+        </a>
+        <a href="services.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg text-zinc-650 hover:bg-zinc-55 hover:text-zinc-950 transition-colors">
+          Services
+        </a>
+        <a href="contact.html" class="text-left font-display text-lg font-semibold py-2.5 px-4 rounded-lg text-zinc-650 hover:bg-zinc-55 hover:text-zinc-950 transition-colors">
+          Contact
+        </a>
+        <div class="h-[1px] bg-zinc-100 my-2"></div>
+        <a href="contact.html" class="w-full py-3.5 bg-zinc-950 text-white font-display text-sm font-bold tracking-wider uppercase rounded-lg transition-colors block text-center">
+          Start Project
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-20">
+      
+      <!-- Intro Section -->
+      <section class="pt-28 pb-16 bg-gradient-to-b from-zinc-50 to-white">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="max-w-3xl">
+            <span class="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-3">Our Core Story</span>
+            <h1 class="font-display text-4xl sm:text-5xl font-bold text-zinc-950 tracking-tight leading-tight mb-6">
+              A studio built on mathematical balance and pristine aesthetics.
+            </h1>
+            <p class="font-sans text-md text-zinc-600 leading-relaxed">
+              We started Vanguard because we were tired of generic layout elements that look identical and render sluggishly. We believe every brand deserves a custom-designed, pixel-perfect, highly optimized, and responsive static presence that communicates authority.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Values Block -->
+      <section class="py-20 bg-white border-t border-zinc-100">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+            
+            <!-- Side intro col -->
+            <div class="md:col-span-4 flex flex-col justify-between">
+              <div>
+                <span class="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-3">Operational Values</span>
+                <h2 class="font-display text-2xl sm:text-3xl font-bold text-zinc-950 tracking-tight">
+                  How we approach digital construction
+                </h2>
+              </div>
+              <p class="font-sans text-xs text-zinc-500 leading-relaxed mt-6 hidden md:block">
+                We design with strict compliance parameters. Performance, accessibility, and architectural layout rules are never treated as secondary features.
+              </p>
+            </div>
+
+            <!-- Double col of values -->
+            <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-950 mt-1">
+                  <i data-lucide="award" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h3 class="font-display font-bold text-sm text-zinc-950 mb-1.5">Meticulous Craftsmanship</h3>
+                  <p class="font-sans text-xs text-zinc-600 leading-relaxed">
+                    We select every margin, typeface, and color palette with dedicated logical intent. Every code segment is written by experienced professionals.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-950 mt-1">
+                  <i data-lucide="users" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h3 class="font-display font-bold text-sm text-zinc-950 mb-1.5">No-Friction Communication</h3>
+                  <p class="font-sans text-xs text-zinc-600 leading-relaxed">
+                    We deliver clear blueprint files, exact functional interactive mockups, and respond to design requirements within hours.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-950 mt-1">
+                  <i data-lucide="eye" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h3 class="font-display font-bold text-sm text-zinc-950 mb-1.5">Complete Visual Authority</h3>
+                  <p class="font-sans text-xs text-zinc-600 leading-relaxed">
+                    Our digital designs are unique to your brand's authority. We avoid default generic layouts to guarantee immediate visual differentiation.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-950 mt-1">
+                  <i data-lucide="shield-check" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h3 class="font-display font-bold text-sm text-zinc-950 mb-1.5">Persistent Performance</h3>
+                  <p class="font-sans text-xs text-zinc-600 leading-relaxed">
+                    We support static-feel layouts that load in less than 1 second, resulting in optimal organic SEO positioning and premium conversions.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Story Timeline -->
+      <section class="py-24 bg-zinc-50 border-y border-zinc-150">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-3">Interactive Chronicle</span>
+            <h2 class="font-display text-3xl font-bold text-zinc-950 tracking-tight">
+              Our Journey Through Time
+            </h2>
+            <p class="font-sans text-xs text-zinc-500 mt-2">
+              Select any year block to reveal details about milestones and technical growth phases.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Selector Buttons Left (4 cols) -->
+            <div class="lg:col-span-4 flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible gap-2 pb-4 lg:pb-0 scrollbar-none">
+              
+              <!-- Button 2022 -->
+              <button onclick="setActiveMilestone('2022')" id="milestone-btn-2022" class="timeline-btn flex-shrink-0 flex items-center gap-4 text-left p-5 rounded-lg border cursor-pointer transition-all bg-zinc-950 text-white border-zinc-950 shadow-md">
+                <span class="font-mono text-xl font-black">2022</span>
+                <div class="hidden sm:block">
+                  <span class="font-display text-xs font-bold block">Founding of Vanguard</span>
+                  <span class="text-[10px] block text-zinc-400">Stockholm, Sweden</span>
+                </div>
+              </button>
+
+              <!-- Button 2023 -->
+              <button onclick="setActiveMilestone('2023')" id="milestone-btn-2023" class="timeline-btn flex-shrink-0 flex items-center gap-4 text-left p-5 rounded-lg border cursor-pointer transition-all bg-white text-zinc-800 border-zinc-200 hover:border-zinc-300">
+                <span class="font-mono text-xl font-black">2023</span>
+                <div class="hidden sm:block">
+                  <span class="font-display text-xs font-bold block">Expansion Lab</span>
+                  <span class="text-[10px] block text-zinc-500">Zurich Lab launch</span>
+                </div>
+              </button>
+
+              <!-- Button 2024 -->
+              <button onclick="setActiveMilestone('2024')" id="milestone-btn-2024" class="timeline-btn flex-shrink-0 flex items-center gap-4 text-left p-5 rounded-lg border cursor-pointer transition-all bg-white text-zinc-800 border-zinc-200 hover:border-zinc-300">
+                <span class="font-mono text-xl font-black">2024</span>
+                <div class="hidden sm:block">
+                  <span class="font-display text-xs font-bold block">CSS Architecture</span>
+                  <span class="text-[10px] block text-zinc-500">Tailwind Atomic patterns</span>
+                </div>
+              </button>
+
+              <!-- Button 2025 -->
+              <button onclick="setActiveMilestone('2025')" id="milestone-btn-2025" class="timeline-btn flex-shrink-0 flex items-center gap-4 text-left p-5 rounded-lg border cursor-pointer transition-all bg-white text-zinc-800 border-zinc-200 hover:border-zinc-300">
+                <span class="font-mono text-xl font-black">2025</span>
+                <div class="hidden sm:block">
+                  <span class="font-display text-xs font-bold block">Global Launch</span>
+                  <span class="text-[10px] block text-zinc-500">Enterprise support</span>
+                </div>
+              </button>
+            </div>
+
+            <!-- Output Display Area Box Right (8 cols) -->
+            <div class="lg:col-span-8 bg-white p-8 md:p-12 rounded-xl border border-zinc-200 shadow-sm min-h-[280px] flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  <i data-lucide="milestone" class="w-5 h-5 text-zinc-505"></i>
+                  <span id="milestone-label" class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-400">Phase 01 System</span>
+                </div>
+                <h3 id="milestone-title" class="font-display text-2xl font-black text-zinc-950 mb-4">
+                  Founding of Vanguard — Stockholm, Sweden
+                </h3>
+                <p id="milestone-desc" class="font-sans text-sm text-zinc-600 leading-relaxed">
+                  Vanguard was initialized inside a small design loft in Sweden by three creative engineers with the vision to make client-side web interfaces feel like cohesive, instant, and tactile machines.
+                </p>
+              </div>
+
+              <div class="flex items-center gap-2 font-mono text-[10px] text-zinc-400 mt-6 border-t border-zinc-100 pt-4">
+                <span class="w-2 h-2 rounded-full bg-zinc-950 animate-pulse"></span>
+                <span>ACTIVE Blueprints & Technical logs cleared.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Team Section -->
+      <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest block mb-3">Our Architects</span>
+            <h2 class="font-display text-3xl font-bold text-zinc-950 tracking-tight">
+              An assembly of highly focused engineers & stylists.
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Member 1 -->
+            <div class="group bg-zinc-50 rounded-xl border border-zinc-150 overflow-hidden hover:border-zinc-300 hover:shadow-lg transition-all">
+              <div class="aspect-square relative overflow-hidden bg-zinc-100">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=350&q=80" alt="Freja Lindqvist" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" referrerpolicy="no-referrer">
+              </div>
+              <div class="p-6">
+                <h3 class="font-display font-extrabold text-lg text-zinc-950 leading-none mb-1">Freja Lindqvist</h3>
+                <span class="font-mono text-[10px] font-bold uppercase tracking-widest text-zinc-500 block mb-4">Founding Partner & Lead Architect</span>
+                <p class="font-sans text-sm text-zinc-600 leading-relaxed mb-6">
+                  Freja has spent 12 years engineering layout blueprints. She ensures every structural frame satisfies exact math ratios and visual proportions.
+                </p>
+                <div class="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-200">
+                  <span class="font-mono text-[9px] font-semibold bg-white border border-zinc-200 text-zinc-700 px-2 py-0.5 rounded">TypeScript</span>
+                  <span class="font-mono text-[9px] font-semibold bg-white border border-zinc-200 text-zinc-700 px-2 py-0.5 rounded">Visual Grids</span>
+                  <span class="font-mono text-[9px] font-semibold bg-white border border-zinc-200 text-zinc-700 px-2 py-0.5 rounded">W3C Ergonomics</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Member 2 -->
+            <div class="group bg-zinc-50 rounded-xl border border-zinc-150 overflow-hidden hover:border-zinc-300 hover:shadow-lg transition-all">
+              <div class="aspect-square relative overflow-hidden bg-zinc-100">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=350&q=80" alt="Arvid Sjöberg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" referrerpolicy="no-referrer">
+              </div>
+              <div class="p-6">
+                <h3 class="font-display font-extrabold text-lg text-zinc-950 leading-none mb-1">Arvid Sjöberg</h3>
+                <span class="font-mono text-[10px] font-bold uppercase tracking-widest text-zinc-500 block mb-4">Lead Developer & Interaction Designer</span>
+                <p class="font-sans text-sm text-zinc-600 leading-relaxed mb-6">
+                  Arvid translates complex canvas specifications into lightning-fast React components, keeping main thread rendering times under 50ms.
+                </p>
+                <div class="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-200">
+                  <span class="font-mono text-[9px] font-semibold bg-white border border-zinc-200 text-zinc-700 px-2 py-0.5 rounded">CSS Optimization</span>
+                  <span class="font-mono text-[9px] font-semibold bg-white border border-zinc-200 text-zinc-700 px-2 py-0.5 rounded">Micro-Animations</span>
+                  <span class="font-mono text-[9px] font-semibold bg-white border border-zinc-200 text-zinc-700 px-2 py-0.5 rounded">Accessibility</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Member 3 -->
+            <div class="group bg-zinc-50 rounded-xl border border-zinc-150 overflow-hidden hover:border-zinc-300 hover:shadow-lg transition-all">
+              <div class="aspect-square relative overflow-hidden bg-zinc-100">
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=350&q=80" alt="Elena Kaelis" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" referrerpolicy="no-referrer">
+              </div>
+              <div class="p-6">
+                <h3 class="font-display font-extrabold text-lg text-zinc-950 leading-none mb-1">Elena Kaelis</h3>
+                <span class="font-mono text-[10px] font-bold uppercase tracking-widest text-zinc-500 block mb-4">Principal Fluid Designer</span>
+                <p class="font-sans text-sm text-zinc-600 leading-relaxed mb-6">
+                  Elena designs state transitions and responsive color frameworks that look consistent from compact mobile screens to massive grid displays.
+                </p>
+                <div class="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-200">
+                  <span class="font-mono text-[9px] font-semibold bg-white border border-zinc-200 text-zinc-700 px-2 py-0.5 rounded">Color Grids</span>
+                  <span class="font-mono text-[9px] font-semibold bg-white border border-zinc-200 text-zinc-700 px-2 py-0.5 rounded">UX Resiliency</span>
+                  <span class="font-mono text-[9px] font-semibold bg-white border border-zinc-200 text-zinc-700 px-2 py-0.5 rounded">Branding</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Navigation -->
+    <footer class="bg-zinc-950 text-white pt-20 pb-10 border-t border-zinc-900">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-zinc-800">
+          
+          <!-- Column 1: Brand Info -->
+          <div class="md:col-span-5 flex flex-col gap-6">
+            <div class="flex items-center gap-2.5">
+              <div class="w-10 h-10 bg-white flex items-center justify-center rounded-lg">
+                <i data-lucide="sparkles" class="w-5 h-5 text-zinc-950"></i>
+              </div>
+              <div>
+                <span class="font-display font-bold text-lg tracking-tight block text-white">Vanguard</span>
+                <span class="font-mono text-[9px] font-semibold text-zinc-400 tracking-widest uppercase block -mt-1">Digital Studio</span>
+              </div>
+            </div>
+            
+            <p class="font-sans text-sm text-zinc-400 leading-relaxed max-w-sm">
+              We design and construct premium physical and virtual interfaces. Simple layout aesthetics crafted for exceptional organizations globally.
+            </p>
+            
+            <div class="flex flex-col gap-1.5 mt-2">
+              <span class="font-mono text-[10px] uppercase text-zinc-500 tracking-widest">Global Headquarters</span>
+              <span class="text-xs text-zinc-300">85 Swede Avenue, Penthouse Level, Stockholm</span>
+            </div>
+          </div>
+
+          <!-- Column 2: Sitemap Quick Links -->
+          <div class="md:col-span-3 flex flex-col gap-5">
+            <h4 class="font-display text-xs uppercase font-extrabold tracking-widest text-zinc-300">Sitemap</h4>
+            <ul class="flex flex-col gap-3">
+              <li><a href="index.html" class="text-sm text-zinc-400 hover:text-white transition-colors">Home Mainframe</a></li>
+              <li><a href="about.html" class="text-sm text-zinc-400 hover:text-white transition-colors">Our Philosophy & Story</a></li>
+              <li><a href="services.html" class="text-sm text-zinc-400 hover:text-white transition-colors">Digital Craft Catalog</a></li>
+              <li><a href="contact.html" class="text-sm text-zinc-400 hover:text-white transition-colors">Initiate Project Brief</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Email newsletter dispatch -->
+          <div class="md:col-span-4 flex flex-col gap-5">
+            <h4 class="font-display text-xs uppercase font-extrabold tracking-widest text-zinc-300">Studio Dispatch</h4>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              Subscribe to the Sentinel Journal—our monthly editorial regarding web standards, layout ergonomics, and visual code.
+            </p>
+            
+            <div id="newsletter-success" class="hidden bg-zinc-900 border border-emerald-500/30 text-emerald-400 rounded-lg p-3.5 flex items-center gap-3 transition-all">
+              <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0"></i>
+              <span class="text-xs font-semibold">Subscription finalized. Welcome aboard.</span>
+            </div>
+
+            <form id="newsletter-form" onsubmit="submitNewsletter(event)" class="flex gap-2">
+              <div class="relative flex-1">
+                <i data-lucide="mail" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500"></i>
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter email address"
+                  id="newsletter-email"
+                  class="w-full pl-10 pr-4 py-2.5 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 focus:border-white focus:outline-none rounded-lg text-xs text-white transition-colors placeholder:text-zinc-500"
+                />
+              </div>
+              <button
+                type="submit"
+                class="px-4 py-2.5 bg-white hover:bg-zinc-200 text-zinc-950 font-semibold rounded-lg transition-colors cursor-pointer flex items-center justify-center"
+                aria-label="Subscribe"
+              >
+                <i data-lucide="send" class="w-4 h-4"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Footer Bottom Bar -->
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="font-mono text-[10px] text-zinc-500">
+            © 2026 Vanguard. Constructed in compliance with static HTML & CSS layout standards.
+          </p>
+          
+          <div class="flex gap-6 font-mono text-[10px] text-zinc-400">
+            <span class="tracking-wide">UTC 10:31:23</span>
+            <span class="text-zinc-600">|</span>
+            <a href="#main-navbar" class="hover:underline">STAY GROUNDED</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Icon Generation and Interactive Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      // Initialize Icons
+      lucide.createIcons();
+
+      // Navbar Scroll Controller
+      window.addEventListener('scroll', () => {
+        const header = document.getElementById('main-navbar');
+        if (window.scrollY > 10) {
+          header.classList.remove('bg-transparent', 'border-transparent');
+          header.classList.add('bg-white/90', 'backdrop-blur-md', 'border-zinc-100', 'shadow-sm');
+        } else {
+          header.classList.add('bg-transparent', 'border-transparent');
+          header.classList.remove('bg-white/90', 'backdrop-blur-md', 'border-zinc-100', 'shadow-sm');
+        }
+      });
+
+      // Mobile Menu Dropdown Control
+      const mobileTrigger = document.getElementById('mobile-menu-trigger');
+      const mobileDropdown = document.getElementById('mobile-dropdown');
+      const menuIcon = document.getElementById('menu-icon');
+
+      mobileTrigger.addEventListener('click', () => {
+        const isOpen = !mobileDropdown.classList.contains('hidden');
+        if (isOpen) {
+          mobileDropdown.classList.add('hidden');
+          mobileDropdown.classList.remove('flex');
+          menuIcon.setAttribute('data-lucide', 'menu');
+        } else {
+          mobileDropdown.classList.remove('hidden');
+          mobileDropdown.classList.add('flex');
+          menuIcon.setAttribute('data-lucide', 'x');
+        }
+        lucide.createIcons();
+      });
+
+      // Interactive Milestones Data Map
+      const timelineData = {
+        '2022': {
+          title: "Founding of Vanguard — Stockholm, Sweden",
+          label: "Phase 01 System",
+          desc: "Vanguard was initialized inside a small design loft in Sweden by three creative engineers with the vision to make client-side web interfaces feel like cohesive, instant, and tactile machines."
+        },
+        '2023': {
+          title: "Expansion & W3C Standards Focus — Zurich Lab Launch",
+          label: "Phase 02 Expansion",
+          desc: "Established a core development think-tank focusing deeply on responsive layouts, strict typescript systems, and absolute accessibility compliance for global financial products."
+        },
+        '2024': {
+          title: "High Performance & CSS Architecture — CSS System Patents",
+          label: "Phase 03 Optimization",
+          desc: "Pioneered custom atomic layout patterns in Tailwind and compiled fluid rendering engines, ensuring all client websites score 100 on standard core web vitals and mobile screen margins."
+        },
+        '2025': {
+          title: "Vanguard Global Launch — Web3 & Beyond",
+          label: "Phase 04 Global Era",
+          desc: "Opened Swede Penthouse Headquarters and grew to supporting enterprise networks globally with high-contrast web blueprints and complex visual frameworks."
+        }
+      };
+
+      // Milestone Switch Action
+      function setActiveMilestone(year) {
+        // Toggle selected state on buttons
+        const buttons = document.querySelectorAll('.timeline-btn');
+        buttons.forEach(btn => {
+          if (btn.id === `milestone-btn-${year}`) {
+            btn.className = "timeline-btn flex-shrink-0 flex items-center gap-4 text-left p-5 rounded-lg border cursor-pointer transition-all bg-zinc-950 text-white border-zinc-950 shadow-md";
+          } else {
+            btn.className = "timeline-btn flex-shrink-0 flex items-center gap-4 text-left p-5 rounded-lg border cursor-pointer transition-all bg-white text-zinc-800 border-zinc-200 hover:border-zinc-300";
+          }
+        });
+
+        // Update Text Details
+        const activeData = timelineData[year];
+        if (activeData) {
+          document.getElementById('milestone-label').textContent = activeData.label;
+          document.getElementById('milestone-title').textContent = activeData.title;
+          document.getElementById('milestone-desc').textContent = activeData.desc;
+        }
+      }
+
+      // Newsletter dispatch newsletter handles
+      function submitNewsletter(e) {
+        e.preventDefault();
+        const email = document.getElementById('newsletter-email').value;
+        if (email.trim() !== '') {
+          document.getElementById('newsletter-form').classList.add('hidden');
+          document.getElementById('newsletter-success').classList.remove('hidden');
+        }
+      }
+    </script>
+  </body>
+</html>
